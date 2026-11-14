@@ -1,0 +1,38 @@
+name: Profile release
+
+# Keeps every version of the profile page: when Profile/index.html changes on
+# the default branch, a copy is published as the asset of a release `profile-…`.
+# The title and the notes of the release are the subject and the body of the
+# last commit that touched the page.
+
+on:
+  push:
+    branches: [main]
+    paths: [Profile/index.html]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Publish the page as a release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="profile-page-$(date -u +%Y%m%d)"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            tag="$tag-$(date -u +%H%M)"
+          fi
+          title="$(git log -1 --format=%s -- Profile/index.html)"
+          git log -1 --format=%b -- Profile/index.html \
+            | grep -vE '^(Co-Authored-By|Claude-Session):' > notes.md || true
+          cp Profile/index.html profil-jdc.html
+          gh release create "$tag" profil-jdc.html \
+            --target "$GITHUB_SHA" --title "$title" --notes-file notes.md
