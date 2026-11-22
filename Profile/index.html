@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aiwa — ask for the result</title>
-<meta name="description" content="Aiwa is a free voice agent that gets things done, on any device, with the AIs you already love, in your own GitHub account.">
+<meta name="description" content="Aiwa is an agent-centric societal operating system: an agent that gets things done, and a global-state-free protocol for value transfer and accrual, in JavaScript, in your own GitHub account.">
 <meta name="theme-color" content="#050408">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,14 +45,18 @@ h1{font-weight:300;font-size:clamp(46px,11.5vw,148px);line-height:.94;letter-spa
 h1 em{font-style:normal;font-weight:700}
 .lead{font-size:clamp(18px,2.2vw,24px);color:#d8d0e6;max-width:34ch;margin:0 0 30px}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:12px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease)}
+.btn{display:inline-flex;align-items:center;min-height:56px;padding:0 28px;border-radius:12px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease)}
 .btn.main{background:var(--pink);color:var(--ground);font-weight:500}
-.btn.main:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(244,123,203,.35)}
+.btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (hover:hover){.btn.main:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(244,123,203,.35)}}
 .btn.line{border:1px solid #3a3150;color:var(--text)}
-.btn.line:hover{border-color:var(--cyan);background:rgba(85,217,237,.07)}
+@media (hover:hover){.btn.line:hover{border-color:var(--cyan);background:rgba(85,217,237,.07)}}
+.btn:active{transform:scale(.97)}
 
 /* the orb: the signature. Pure SVG and CSS, it lives without a script */
-.orb{width:min(78vw,430px);aspect-ratio:1;justify-self:center;position:relative}
+.orb{width:min(78vw,430px);aspect-ratio:1;justify-self:center;position:relative;pointer-events:none}
+.orb *{pointer-events:none}
+.hero .copy{position:relative;z-index:3}
 .orb svg{width:100%;height:100%;overflow:visible}
 .glow{position:absolute;inset:-18%;background:radial-gradient(closest-side,rgba(244,123,203,.28),rgba(139,80,216,.16) 55%,transparent 72%);filter:blur(10px);animation:breathe 6s ease-in-out infinite}
 @keyframes breathe{50%{transform:scale(1.08);opacity:.8}}
@@ -142,12 +146,13 @@ footer nav a:hover{border-color:var(--pink)}
 <main>
 <div class="hero">
   <div class="copy">
-    <p class="mono">Free · Android · Windows · macOS · Linux</p>
+    <p class="mono">Agent-centric societal operating system · Free · Android · Windows · macOS · Linux</p>
     <h1>Ask for<br>the <em class="g">result.</em></h1>
-    <p class="lead">Aiwa is a voice agent that gets things done. On any device, with the AIs you already love, in your own GitHub account.</p>
+    <p class="lead">Aiwa is an agent-centric societal operating system. An agent that gets things done, asked by voice, by text or on a schedule, with the AIs you already love, in your own GitHub account. And under it, a protocol for value.</p>
     <div class="cta">
       <a class="btn main" href="#get">Get Aiwa</a>
       <a class="btn line" href="#does">See what it does</a>
+      <a class="btn line" href="#protocol">The protocol</a>
     </div>
   </div>
   <div class="orb" role="img" aria-label="Aiwa's orb: a glowing glass sphere with ribbons of light, and small orbs around it">
@@ -210,13 +215,28 @@ footer nav a:hover{border-color:var(--pink)}
     <div class="card"><span class="mono"><i class="dot" style="background:var(--cyan)"></i>Connect</span><h3>Your services, plugged in.</h3><p>Connect any MCP service. Aiwa reads what its tools can do, uses them, and asks you before anything that changes something.</p></div>
     <div class="card"><span class="mono"><i class="dot" style="background:var(--amber)"></i>Plan</span><h3>Do it later, or again and again.</h3><p>Plan an action in a few minutes, or on a rhythm, and Aiwa comes back to it by itself.</p></div>
     <div class="card"><span class="mono"><i class="dot" style="background:var(--violet)"></i>Meet</span><h3>Matches, personal or professional.</h3><p>Profiles that adapt to whoever looks at them. You choose what is shared, and your own description stays on your phone.</p></div>
-    <div class="card"><span class="mono"><i class="dot" style="background:var(--pink)"></i>Speak</span><h3>A voice, not a form.</h3><p>A wake word, a voice that can be interrupted, an interpreter between two languages, and a natural voice that runs on your device.</p></div>
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--pink)"></i>Speak</span><h3>Say it, or write it.</h3><p>Voice is the easiest way in, not the only one: you can write to it, or let it act on its own. A wake word, a voice that can be interrupted, an interpreter between two languages, and a natural voice that runs on your device.</p></div>
     <div class="card"><span class="mono"><i class="dot" style="background:var(--cyan)"></i>Keep</span><h3>It stays yours.</h3><p>What you make lives in your own GitHub account, not on a server of ours.</p></div>
   </div>
 </section>
 
+<section id="protocol">
+  <p class="mono">03 — Protocol</p>
+  <h2>Value moves. <em class="g">No global state.</em></h2>
+  <p class="lead" style="margin-top:28px;max-width:60ch">A global-state-free value transfer and accrual system: no chain everyone must agree on, no server that holds the truth. An agnostic JavaScript execution infrastructure for the mass adoption of asset tokenisation.</p>
+  <div class="grid">
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--pink)"></i>Transfer</span><h3>Signed actions, not a ledger.</h3><p>Value moves by actions each person signs. Whoever needs a balance replays the actions it concerns and gets the same answer as everyone else.</p></div>
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--cyan)"></i>Contracts</span><h3>Smart contracts as plain reducers.</h3><p>A contract is a rule: a state and an event give the next state. Tokens, subscriptions, any agreement is written the same way and checked by whoever replays it.</p></div>
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--amber)"></i>JavaScript</span><h3>One agnostic runtime.</h3><p>Pure JavaScript, so the same contract runs on a phone, a computer, a browser, or inside an agent. No virtual machine of its own, no network to join first.</p></div>
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--violet)"></i>Tokenisation</span><h3>Make assets liquid.</h3><p>Tokenisation exists to make what is hard to sell easy to exchange. The legal layer stays outside the protocol, where law lives, and plugs in when a legislator is connected.</p></div>
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--pink)"></i>Accrual</span><h3>Value that builds up.</h3><p>Payments, access and rewards accrue to the people they belong to, verified by replaying the record rather than trusting a middleman.</p></div>
+    <div class="card"><span class="mono"><i class="dot" style="background:var(--cyan)"></i>Agent-centric</span><h3>The agent is the node.</h3><p>Each person's agent holds, checks and exchanges for them. Society is the sum of agents that agree on rules, not of platforms that own the data.</p></div>
+  </div>
+  <p class="mono" style="margin-top:28px"><a href="https://github.com/theodoreyong9/Aiwa_public">Read the yellow paper</a></p>
+</section>
+
 <section id="free">
-  <p class="mono">03 — Yours</p>
+  <p class="mono">04 — Yours</p>
   <h2>Free. And <em class="g">yours.</em></h2>
   <div class="big">
     <div class="hot">100% free <span>no plan, no paywall</span></div>
@@ -227,7 +247,7 @@ footer nav a:hover{border-color:var(--pink)}
 </section>
 
 <section id="get">
-  <p class="mono">04 — Everywhere</p>
+  <p class="mono">05 — Everywhere</p>
   <h2>On any <em class="g">device.</em></h2>
   <div class="dl">
     <a href="https://github.com/theodoreyong9/Aiwa_public/releases/download/android-latest/Aiwa.apk"><span class="mono">Android</span><b>Aiwa.apk</b></a>
