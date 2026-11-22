@@ -1,20 +1,19 @@
-# Références de design — page de profil
+# Design references: the profile page (Aiwa)
 
-Références gardées pour `Profile/index.html` (catalogue design-research d'Aiwa, recherche du 14/11/2026, format `site`).
-Les trois autres résultats du pack n'ont pas été regardés et ne sont pas cités.
+Kept for `Profile/index.html` (design-research catalogue, search of the day, format `site`: « a luminous dark product page for a free voice agent that gets things done, one glowing orb as the signature, conversation-style copy, mobile first »). Of the five results, only the two below were looked at; the others are not cited.
 
-## 1. Aspen Search — https://www.aspensearch.com/
+## 1. Cerebrium — https://cerebrium.ai/
+- `id`: `cerebrium.ai`
+- Capture looked at: https://raw.githubusercontent.com/theodoreyong9/Aiwa_public/main/skills/kit/design-research/screenshots/cerebrium.ai/mobile.jpg
+- Measures (catalogue): dark, sans with uppercase mono labels, layered composition, reveal on scroll, transitions 100 to 900 ms.
+- Seen on the capture, which the measures do not say: a very large light sans headline with ONE word in the accent colour, small uppercase mono buttons, the colour carried by one soft gradient, a lot of empty ground.
+- Taken: the one accented word of the headline (here « result. », in the gradient), the small mono uppercase labels and buttons, the emptiness around the headline. Not its layout, its product video or its colours (the violet and pink here are Aiwa's own).
 
-- `id` : `aspensearch.com`
-- Capture regardée : https://raw.githubusercontent.com/theodoreyong9/Aiwa_public/main/skills/kit/design-research/screenshots/aspensearch.com/mobile.jpg (`aspensearch.com-mobile-mobile.jpg` dans le pack)
-- Mesures : une grotesque et sa mono (suisseIntl, 161 et 58 usages), texte le plus grand 180 px (12,5 vw), rapport d'échelle 11,3 ; palette retenue, saturation 0,21, un seul accent vert menthe ; transitions de 200 à 800 ms, `cubic-bezier(0.16, 1, 0.3, 1)`.
-- Vu sur la capture, que les mesures ne disent pas : la page est découpée par des filets d'un pixel en cases, et l'accent n'occupe qu'une seule case ; le très grand texte sort du cadre sans gêner la lecture.
-- Ce que j'en ai pris : les filets fins qui séparent tout (les trois lignes « sans », les fiches, la grille des briques), l'accent unique réservé à ce qui compte, la courbe d'accélération des entrées. Ni sa grille, ni ses couleurs, ni ses polices.
+## 2. TIB Digital — https://tibdigital.com/
+- `id`: `tibdigital.com`
+- Capture looked at: https://raw.githubusercontent.com/theodoreyong9/Aiwa_public/main/skills/kit/design-research/screenshots/tibdigital.com/desktop.jpg
+- Measures (catalogue): dark, sans and mono, SVG-heavy, continuous motion.
+- Seen on the capture: a handful of very fine curved lines crossing the whole screen, a mono counter in a corner, the ground left almost black.
+- Taken: the fine threads that cross the page (four SVG paths, fixed behind everything), and the almost-black ground. Not its logo, its counter or its green.
 
-## 2. Zero — https://why.zero.university/
-
-- `id` : `why.zero.university`
-- Capture regardée : https://raw.githubusercontent.com/theodoreyong9/Aiwa_public/main/skills/kit/design-research/screenshots/why.zero.university/mobile.jpg (`why.zero.university-mobile-mobile.jpg` dans le pack)
-- Mesures : mono dominante (PP Supply Mono, 11 usages sur 13), taille médiane 12 px contre 150 px au plus (rapport 12,5), interlettrage moyen 0,095 ; fond sombre, saturation 0,2.
-- Vu sur la capture : seulement l'écran de chargement, un dégradé vert et un compteur en bas à gauche ; la page elle-même n'y est pas, je n'en juge donc pas la composition.
-- Ce que j'en ai pris : le parti d'une mono petite et espacée pour tout ce qui est étiquette, contre un très grand titre (ici 12 px en capitales espacées contre une serif jusqu'à 200 px), sur fond sombre.
+What is Aiwa's own: the orb (SVG and CSS, no script), the conversation as the way the page speaks, the palette #050408 / #8B50D8 / #F47BCB / #55D9ED / #FF9A55.
