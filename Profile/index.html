@@ -121,6 +121,9 @@ h2 em{font-style:normal;font-weight:700}
 .ais span{padding:9px 16px;border:1px solid #2c2347;border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
 /* the live */
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:#1d1830;border:1px solid #1d1830;margin-top:28px}
+.how div{background:var(--ground);padding:20px 22px}
+.how p{margin:8px 0 0;color:#c9c1d8;font-size:16px}
 .stage{position:relative;aspect-ratio:16/9;margin-top:clamp(28px,5vw,56px);border:1px solid #2c2347;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,rgba(139,80,216,.16),rgba(5,4,8,.6) 60%)}
 .stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .off{position:absolute;inset:0;display:grid;place-content:center;gap:8px;text-align:center;padding:24px}
@@ -275,6 +278,12 @@ footer nav a:hover{border-color:var(--pink)}
 <section id="live">
   <p class="mono">06 — Live</p>
   <h2>On air, <em class="g">right here.</em></h2>
+  <p class="lead" style="margin-top:28px;max-width:60ch">Aiwa is built live, by voice, with Aiwa itself. I speak, the agent writes, tests and ships, and you watch it happen. The audience takes part: what gets built next is decided together, in the open.</p>
+  <div class="how">
+    <div><span class="mono">1 — Ask</span><p>A feature is asked out loud, in plain words.</p></div>
+    <div><span class="mono">2 — Build</span><p>Aiwa writes the code, runs the tests and publishes the build, on screen.</p></div>
+    <div><span class="mono">3 — Decide together</span><p>The people watching say what should come next.</p></div>
+  </div>
   <div class="stage" id="stage">
     <iframe id="stream" title="Aiwa live" allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
     <div class="off" id="off"><span class="mono">Off air</span><b>Not live right now.</b><p>When the stream starts, it plays here by itself: no link to follow.</p></div>
