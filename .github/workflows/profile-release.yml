@@ -1,7 +1,8 @@
 name: Profile release
 
-# Keeps every version of the profile page: when Profile/index.html changes on
-# the default branch, a copy is published as the asset of a release `profile-…`.
+# Keeps one copy of the profile page: when Profile/index.html changes on the
+# default branch, a copy is published as the asset of the release `profile-page`,
+# which replaces the one before (the older versions are in the commits).
 # The title and the notes of the release are the subject and the body of the
 # last commit that touched the page.
 
@@ -26,10 +27,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          tag="profile-page-$(date -u +%Y%m%d)"
-          if gh release view "$tag" >/dev/null 2>&1; then
-            tag="$tag-$(date -u +%H%M)"
-          fi
+          tag="profile-page"
+          # the copy before it, and the dated ones of the earlier workflow, are removed: one profile per repository
+          for old in $(gh release list --limit 200 --json tagName --jq '.[].tagName' | grep -E '^profile-page(-|$)' || true); do
+            gh release delete "$old" --yes --cleanup-tag
+          done
           title="$(git log -1 --format=%s -- Profile/index.html)"
           git log -1 --format=%b -- Profile/index.html \
             | grep -vE '^(Co-Authored-By|Claude-Session):' > notes.md || true
