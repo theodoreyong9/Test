@@ -110,6 +110,17 @@ details.more summary::after{content:"+";font-size:18px;color:var(--dim);transiti
 details.more[open] summary::after{transform:rotate(45deg)}
 details.more[open] summary{border-color:var(--pink)}
 
+/* the open positions of a page: one button each */
+.positions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:clamp(32px,5vw,56px)}
+.positions:empty{display:none}
+.pos{border:1px solid #2c2347;border-radius:18px;padding:24px 24px 26px;background:rgba(244,123,203,.04)}
+.pos h3{margin:10px 0 18px;font-weight:700;font-size:24px;line-height:1.15;letter-spacing:-.02em}
+.pos .nofall{margin-top:18px;padding-top:16px;border-top:1px solid #2c2347;font-size:15px;line-height:1.6;color:#c9c1d8}
+.pos .nofall a{border-bottom:1px solid var(--pink)}
+.pos .keyline{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.pos .keyline code{font-family:var(--mono);font-size:12px;word-break:break-all;color:var(--text)}
+.pos .keyline button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:none;color:var(--text);border:1px solid #2c2347;border-radius:999px;padding:8px 14px;cursor:pointer;min-height:36px}
+
 /* two halves, and the steps of the recruitment */
 .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(36px,6vw,88px);margin-top:clamp(36px,6vw,72px)}
 .split h3{margin:16px 0 14px;font-weight:700;font-size:clamp(26px,3.6vw,44px);line-height:1.08;letter-spacing:-.025em}
@@ -278,8 +289,8 @@ footer nav a:hover{border-color:var(--pink)}
   <h2>Recruit with AI.<br><em class="g">At any scale, at no cost.</em></h2>
   <p class="lead" style="margin-top:28px;max-width:62ch">A recruiter makes a key. Every candidate is interviewed by <b>their own agent</b>, and only a sealed conclusion reaches the recruiter. No platform to build, no server to host, no fee per candidate: the work is done by the candidates' own agents, on their own devices.</p>
   <div class="steps">
-    <div><span class="mono">1 · Make a key</span><h3>A title, a brief, a duration.</h3><p>Name the position, say what you look for and what to ask, choose how long the interview lasts and how many days the answers are kept. The key is one short line.</p></div>
-    <div><span class="mono">2 · Share it</span><h3>Anywhere, or as a button.</h3><p>Paste it in a message, an advert, a page. Or show it as an <b>Interview</b> button on your profile: one touch and the candidate's agent starts.</p></div>
+    <div><span class="mono">1 · Make a key</span><h3>A title, a brief, a duration.</h3><p>Name the position, say what you look for and what to ask, choose how long the interview lasts and how many days the answers are kept. The key is one short line. Make it in the app, or just tell Aiwa: it does it for you.</p></div>
+    <div><span class="mono">2 · Share it</span><h3>Anywhere, or as a button.</h3><p>Paste it in a message, an advert, a page. Or have it as an <b>Interview</b> button on your profile, one button per open position: you choose which ones show, and Aiwa can add or remove them when you ask.</p></div>
     <div><span class="mono">3 · The candidate's agent asks</span><h3>By voice or by text.</h3><p>It reads your brief, interviews its owner for the time you set, and uses the file the candidate attached (a CV) to ask better questions. The candidate chose to take it.</p></div>
     <div><span class="mono">4 · A sealed conclusion</span><h3>Only you can read it.</h3><p>The conclusion and the file are sealed with a key made for this interview, then left for you. The candidate sees nothing of it. Delete the key and nothing sent to it can ever be read again.</p></div>
     <div><span class="mono">5 · You read them ranked</span><h3>In Search, under Candidates.</h3><p>Each candidate with a score, a summary, strengths and reservations, and the attached file. What is older than the days you chose is erased by itself, and you can erase one candidate at any time.</p></div>
@@ -291,8 +302,9 @@ footer nav a:hover{border-color:var(--pink)}
     <div>Sealed <span>one key per interview, erased on a date you choose</span></div>
   </div>
   <p class="mono" style="margin-top:28px;max-width:70ch">A system of recruitment, AI to AI, that you set up in a minute. The score is an aid to your decision, not the decision: the agent judges only what your brief asks, and never age, sex, origin, religion, health or any other protected trait.</p>
-  <p id="interview-cta" class="cta" style="margin-top:32px" hidden><a class="btn main" id="interview-go" href="#">Take my interview</a></p>
-  <p class="mono" id="interview-hint" style="margin-top:20px">Keys are made in the app: Search, Candidates. Open this page in Aiwa to see the Interview button.</p>
+  <div id="positions" class="positions"></div>
+  <p class="mono" id="positions-empty" style="margin-top:36px;max-width:70ch">No open position on this page yet. A key is made in the app (Search, Candidates), or just by asking Aiwa: “open an interview for a baker, ten minutes, and put it on my profile”.</p>
+  <p class="cta" style="margin-top:22px"><a class="btn line" href="#get">Get Aiwa to make yours</a></p>
 </section>
 
 <section id="grow">
@@ -518,6 +530,48 @@ footer nav a:hover{border-color:var(--pink)}
   var box=document.getElementById('contacts'),list=document.getElementById('clist');
   if(!box||!list) return;
   var RAW="https://raw.githubusercontent.com/theodoreyong9/Test/main/Profile/aiwa.json";
+  var DL='https://github.com/theodoreyong9/Aiwa_public/releases/tag/android-latest';
+  function showPositions(keys){
+    var box=document.getElementById('positions'),none=document.getElementById('positions-empty');
+    if(!box) return;
+    box.textContent='';
+    if(none) none.hidden=keys.length>0;
+    keys.forEach(function(key){
+      var card=document.createElement('div'); card.className='pos';
+      var kick=document.createElement('span'); kick.className='mono'; kick.textContent='Open position';
+      var h=document.createElement('h3'); h.textContent='Interview';
+      var go=document.createElement('a'); go.className='btn main'; go.textContent='Take this interview'; go.href='aiwa://interview?key='+encodeURIComponent(key);
+      card.appendChild(kick); card.appendChild(h); card.appendChild(go);
+      box.appendChild(card);
+      var repo=key.split('~')[0],id=key.split('~')[1];
+      fetch('https://raw.githubusercontent.com/'+repo+'/HEAD/Interviews/'+id+'.json').then(function(r){ return r.ok?r.json():null; }).then(function(o){
+        if(!o) return;
+        if(o.title) h.textContent=o.title;
+        if(o.minutes) kick.textContent='Open position · '+o.minutes+' min · by voice or text';
+      }).catch(function(){});
+      /* Aiwa opens by itself; if it does not (not installed), the page says what to do instead of doing nothing */
+      go.addEventListener('click',function(){
+        var left=false,hide=function(){ if(document.hidden) left=true; };
+        document.addEventListener('visibilitychange',hide);
+        window.addEventListener('pagehide',hide);
+        setTimeout(function(){
+          document.removeEventListener('visibilitychange',hide); window.removeEventListener('pagehide',hide);
+          if(left||card.querySelector('.nofall')) return;
+          var n=document.createElement('div'); n.className='nofall';
+          var p=document.createElement('p'); p.style.margin='0';
+          p.appendChild(document.createTextNode('Aiwa did not open. If you do not have it yet, '));
+          var a=document.createElement('a'); a.href=DL; a.textContent='get it, it is free'; p.appendChild(a);
+          p.appendChild(document.createTextNode(', then paste this key in Aiwa (mode Interview):'));
+          var line=document.createElement('div'); line.className='keyline';
+          var code=document.createElement('code'); code.textContent=key;
+          var btn=document.createElement('button'); btn.type='button'; btn.textContent='Copy';
+          btn.addEventListener('click',function(){ try{ navigator.clipboard.writeText(key); btn.textContent='Copied'; }catch(e){ btn.textContent=key; } });
+          line.appendChild(code); line.appendChild(btn);
+          n.appendChild(p); n.appendChild(line); card.appendChild(n);
+        },1800);
+      });
+    });
+  }
   function render(c){
     if(!c) return false;
     var items=[];
@@ -527,9 +581,8 @@ footer nav a:hover{border-color:var(--pink)}
       if(/^https?:\/\//i.test(a)){ try{ var u=new URL(a); items.push({href:a,label:u.hostname.replace(/^www\./,'')+u.pathname.replace(/\/$/,'')}); }catch(e){ items.push({label:a}); } }
       else items.push({label:a});
     });
-    var keys=(c.interviews||[]).filter(function(k){ return /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+~[a-z0-9]{6,20}$/.test(String(k)); });
-    var cta=document.getElementById('interview-cta'),go=document.getElementById('interview-go');
-    if(cta&&go&&keys.length){ go.href='aiwa://interview?key='+encodeURIComponent(keys[0]); cta.hidden=false; var hint=document.getElementById('interview-hint'); if(hint) hint.hidden=true; }
+    var keys=(c.interviews||[]).filter(function(k){ return /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+~[a-z0-9]{6,20}$/.test(String(k)); }).slice(0,5);
+    if(keys.length||(c.interviews&&c.interviews.length===0)) showPositions(keys);
     if(!items.length) return !!keys.length;
     list.textContent='';
     items.forEach(function(it){
@@ -540,7 +593,7 @@ footer nav a:hover{border-color:var(--pink)}
     box.hidden=false; return true;
   }
   window.setAiwaContacts=function(c){ render(c); };
-  function read(url){ return fetch(url).then(function(r){ return r.ok?r.json():null; }).then(function(j){ return render(j&&j.contacts); }).catch(function(){ return false; }); }
+  function read(url){ return fetch(url).then(function(r){ return r.ok?r.json():null; }).then(function(j){ return j?render(Object.assign({},j.contacts||{},{interviews:j.interviews||[]})):false; }).catch(function(){ return false; }); }
   read('aiwa.json').then(function(done){ if(!done) return read(RAW); });
 })();
 </script>
