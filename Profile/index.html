@@ -129,6 +129,12 @@ h2 em{font-style:normal;font-weight:700}
 .off{position:absolute;inset:0;display:grid;place-content:center;gap:8px;text-align:center;padding:24px}
 .off b{font-size:clamp(22px,4vw,40px);letter-spacing:-.02em}
 .off p{margin:0;color:var(--dim);max-width:36ch}
+/* contacts: what she writes in the settings of Aiwa */
+.contacts{margin:40px auto 0;max-width:46ch}
+.contacts ul{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.contacts li{padding:9px 16px;border:1px solid #2c2347;border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+.contacts a{text-decoration:none}
+.contacts a:hover{color:var(--pink)}
 footer{padding:clamp(56px,9vw,120px) var(--pad) 40px;border-top:1px solid #1d1830;text-align:center}
 footer h2{margin:0 auto;max-width:none;font-size:clamp(34px,7vw,96px)}
 footer p{margin:22px auto 0;max-width:46ch;color:var(--dim)}
@@ -321,6 +327,10 @@ footer nav a:hover{border-color:var(--pink)}
 <footer>
   <h2>Your universe.<br><em class="g">Your will.</em></h2>
   <p>Aiwa is made in the open. Read it, run it, change it.</p>
+  <div class="contacts" id="contacts" hidden>
+    <p class="mono">Contact</p>
+    <ul id="clist"></ul>
+  </div>
   <nav>
     <a href="https://github.com/theodoreyong9/Aiwa_public">Source and releases</a>
     <a href="https://github.com/theodoreyong9/Aiwa_public/releases/tag/android-latest">Latest build</a>
@@ -432,6 +442,36 @@ footer nav a:hover{border-color:var(--pink)}
     var ask=function(){ removeEventListener('touchend',ask); DeviceOrientationEvent.requestPermission().then(function(r){ if(r==='granted') start(); }).catch(function(){}); };
     addEventListener('touchend',ask,{once:true});
   } else start();
+})();
+</script>
+<script>
+/* the contacts: the e-mail and the social accounts she writes in the settings of Aiwa (the "contacts" of Profile/aiwa.json). The application gives them to the page when it shows it;
+   served alone, the page reads aiwa.json beside it, then the one of the repository on GitHub. */
+(function(){
+  var box=document.getElementById('contacts'),list=document.getElementById('clist');
+  if(!box||!list) return;
+  var RAW="https://raw.githubusercontent.com/theodoreyong9/Test/main/Profile/aiwa.json";
+  function render(c){
+    if(!c) return false;
+    var items=[];
+    if(c.mail) items.push({href:'mailto:'+c.mail,label:c.mail});
+    (c.social||[]).forEach(function(a){
+      a=String(a).trim(); if(!a) return;
+      if(/^https?:\/\//i.test(a)){ try{ var u=new URL(a); items.push({href:a,label:u.hostname.replace(/^www\./,'')+u.pathname.replace(/\/$/,'')}); }catch(e){ items.push({label:a}); } }
+      else items.push({label:a});
+    });
+    if(!items.length) return false;
+    list.textContent='';
+    items.forEach(function(it){
+      var li=document.createElement('li');
+      if(it.href){ var a=document.createElement('a'); a.href=it.href; a.textContent=it.label; li.appendChild(a); } else li.textContent=it.label;
+      list.appendChild(li);
+    });
+    box.hidden=false; return true;
+  }
+  window.setAiwaContacts=function(c){ render(c); };
+  function read(url){ return fetch(url).then(function(r){ return r.ok?r.json():null; }).then(function(j){ return render(j&&j.contacts); }).catch(function(){ return false; }); }
+  read('aiwa.json').then(function(done){ if(!done) return read(RAW); });
 })();
 </script>
 </body>
