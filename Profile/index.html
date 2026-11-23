@@ -248,11 +248,37 @@ footer nav a:hover{border-color:var(--pink)}
     <div class="card"><span class="mono"><svg class="ic" style="color:var(--pink)" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.500 20.500h17"/><path d="M5 16l4.500-5 3.500 3L19.500 6"/><path d="M15 6h4.500v4.500"/></svg>Accrual</span><h3>Value that builds up.</h3><p>Payments, access and rewards accrue to the people they belong to, verified by replaying the record rather than trusting a middleman.</p></div>
     <div class="card"><span class="mono"><svg class="ic" style="color:var(--cyan)" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="4.500" cy="5.500" r="1.800"/><circle cx="19.500" cy="5.500" r="1.800"/><circle cx="4.500" cy="18.500" r="1.800"/><circle cx="19.500" cy="18.500" r="1.800"/><path d="M6 7l4 3.500M18 7l-4 3.500M6 17l4-3.500M18 17l-4-3.500"/></svg>Agent-centric</span><h3>The agent is the node.</h3><p>Each person's agent holds, checks and exchanges for them. Society is the sum of agents that agree on rules, not of platforms that own the data.</p></div>
   </div>
-  <p class="mono" style="margin-top:28px"><a href="https://github.com/theodoreyong9/Aiwa_public">Read the yellow paper</a></p>
+  <p class="mono" style="margin-top:28px"><a href="https://github.com/theodoreyong9/Aiwa_public/blob/main/docs/yellow-paper.md">Read the yellow paper</a></p>
+</section>
+
+<section id="yellowpaper">
+  <p class="mono">04 — Yellow paper</p>
+  <h2>The protocol, <em class="g">written down.</em></h2>
+  <p class="lead" style="margin-top:28px;max-width:60ch">Causal coordination and local value accrual for partition-tolerant networks. A formal specification, with its reference implementation.</p>
+  <div class="grid">
+    <div class="card"><span class="mono">Coordination</span><h3>Every participant keeps its own log.</h3><p>Signed events name their causal parents; nobody needs everybody else's log. Participants operate while disconnected, and reconciliation is deferred, not required.</p></div>
+    <div class="card"><span class="mono">Accrual</span><h3>Value is created locally.</h3><p>Gated once by an external commitment, an irreversible burn on Solana, and thereafter driven by real sequential computation, never by a shared clock.</p></div>
+  </div>
+  <div class="grid">
+    <div class="card"><span class="mono">Pillar 1 · §6</span><h3>Progression</h3><p>How does a domain show that time (work) has passed, without a clock?</p></div>
+    <div class="card"><span class="mono">Pillar 2 · §7</span><h3>Conservation</h3><p>Who owns what, and how is it moved without being spent twice?</p></div>
+    <div class="card"><span class="mono">Pillar 3 · §8</span><h3>Mirror</h3><p>What has a domain seen of the others, verifiably?</p></div>
+  </div>
+  <p class="mono" style="margin-top:28px">No global synchronized state, no consensus quorum, no trusted server. The one external dependency is the burn that opens accrual; once it is made, a domain works offline.</p>
+  <div class="how">
+    <div><span class="mono">I — Foundations</span><p>Identity, events and the log, signed actions.</p></div>
+    <div><span class="mono">II — The three pillars</span><p>Progression, conservation, mirror.</p></div>
+    <div><span class="mono">III — Creating value</span><p>The genesis commitment, accrual, the creator fee, what a third party can read.</p></div>
+    <div><span class="mono">IV — Agreement without a clock</span><p>Partition, branches and conflicts; bounded storage; history recovery.</p></div>
+    <div><span class="mono">V — Programs and applications</span><p>Contracts; bundles and sandboxed execution.</p></div>
+    <div><span class="mono">VI — Informational mechanisms</span><p>Observation: causal tick, hardware roots, relative rate.</p></div>
+    <div><span class="mono">VII — Assessment</span><p>Threats and what answers them; limits and open problems.</p></div>
+  </div>
+  <div class="cta" style="margin-top:32px"><a class="btn main" href="https://github.com/theodoreyong9/Aiwa_public/blob/main/docs/yellow-paper.md">Read the yellow paper</a></div>
 </section>
 
 <section id="free">
-  <p class="mono">04 — Yours</p>
+  <p class="mono">05 — Yours</p>
   <h2>Free. And <em class="g">yours.</em></h2>
   <div class="big">
     <div class="hot">100% free <span>no plan, no paywall</span></div>
@@ -263,7 +289,7 @@ footer nav a:hover{border-color:var(--pink)}
 </section>
 
 <section id="get">
-  <p class="mono">05 — Everywhere</p>
+  <p class="mono">06 — Everywhere</p>
   <h2>On any <em class="g">device.</em></h2>
   <div class="dl">
     <a href="https://github.com/theodoreyong9/Aiwa_public/releases/download/android-latest/Aiwa.apk"><svg class="lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg><span class="mono">Android</span><b>Aiwa.apk</b></a>
@@ -276,7 +302,7 @@ footer nav a:hover{border-color:var(--pink)}
   <p class="mono" style="margin-top:22px">Each build installs over the previous one.</p>
 </section>
 <section id="live">
-  <p class="mono">06 — Live</p>
+  <p class="mono">07 — Live</p>
   <h2>On air, <em class="g">right here.</em></h2>
   <p class="lead" style="margin-top:28px;max-width:60ch">Aiwa is built live, by voice, with Aiwa itself. I speak, the agent writes, tests and ships, and you watch it happen. The audience takes part: what gets built next is decided together, in the open.</p>
   <div class="how">
