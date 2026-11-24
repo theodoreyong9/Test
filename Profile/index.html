@@ -242,7 +242,7 @@ h2{font-size:clamp(46px,9.4vw,148px);line-height:.9;letter-spacing:-.055em;max-w
 @media (prefers-reduced-motion:reduce){.aurora i,.grain,.band .track,.hero h1 .ln>span,.hero .scrollcue::before{animation:none!important}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none;filter:none;transition:none}}
 
 @media (min-width:900px){.hero{grid-template-columns:1.55fr .75fr}.hero .copy{max-width:none}.hero h1{font-size:clamp(90px,10.4vw,200px)}.hero .lead{font-size:clamp(20px,1.9vw,28px)}}
-@media (max-width:899px){.hero{display:block;padding-bottom:96px}.hero .copy{position:relative;z-index:3}.hero .orb{position:absolute;right:-24vw;top:20svh;width:96vw;z-index:1;opacity:.55;pointer-events:none}.hero .lead{text-shadow:0 2px 18px rgba(5,4,10,.9)}}
+@media (max-width:899px){.hero{display:block;padding-bottom:24px}.hero .copy{position:relative;z-index:3}.hero .orb{position:relative;right:auto;top:auto;width:min(86vw,400px);margin:28px auto -8vw;z-index:1;opacity:1;pointer-events:none;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}.hero .lead{text-shadow:0 2px 18px rgba(5,4,10,.9)}}
 
 /* a phone has less to spare: no animated grain, no blur in the reveals */
 @media (max-width:899px){.grain{animation:none;inset:0;opacity:.06}.rv{filter:none}.aurora i:nth-child(3){display:none}}
@@ -720,5 +720,7 @@ if(fine&&!reduce){ var cur=el('div','cur'); body.appendChild(cur); var cx=0,cy=0
 })();
 
 </script>
+<button id="jump" type="button" aria-label="Scroll" style="position:fixed;right:16px;bottom:18px;z-index:50;width:46px;height:46px;border-radius:50%;border:1px solid rgba(244,239,230,.18);background:rgba(17,15,31,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#F4EFE6;font:20px/1 system-ui;cursor:pointer">↓</button>
+<script>(function(){var b=document.getElementById('jump');if(!b)return;function max(){return document.documentElement.scrollHeight-innerHeight}function upd(){b.textContent=(scrollY>max()/2)?'↑':'↓'}addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();b.onclick=function(){var up=scrollY>max()/2;scrollTo({top:up?0:max(),behavior:'smooth'})}})();</script>
 </body>
 </html>
