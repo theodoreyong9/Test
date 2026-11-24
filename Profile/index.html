@@ -734,7 +734,7 @@ if(fine&&!reduce){ var cur=el('div','cur'); body.appendChild(cur); var cx=0,cy=0
 })();
 
 </script>
-<button id="jump" type="button" aria-label="Scroll" style="position:fixed;right:16px;bottom:18px;z-index:50;width:46px;height:46px;border-radius:50%;border:1px solid rgba(244,239,230,.18);background:rgba(17,15,31,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#F4EFE6;font:20px/1 system-ui;cursor:pointer">↓</button>
+<button id="jump" type="button" aria-label="Scroll" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;width:46px;height:46px;border-radius:50%;border:1px solid rgba(244,239,230,.18);background:rgba(17,15,31,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#F4EFE6;font:20px/1 system-ui;cursor:pointer">↓</button>
 <script>(function(){var b=document.getElementById('jump');if(!b)return;function max(){return document.documentElement.scrollHeight-innerHeight}function upd(){b.textContent=(scrollY>max()/2)?'↑':'↓'}addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();b.onclick=function(){var up=scrollY>max()/2;scrollTo({top:up?0:max(),behavior:'smooth'})}})();</script>
 </body>
 </html>
