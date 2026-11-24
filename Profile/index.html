@@ -247,6 +247,8 @@ h2{font-size:clamp(46px,9.4vw,148px);line-height:.9;letter-spacing:-.055em;max-w
 /* a phone has less to spare: no animated grain, no blur in the reveals */
 @media (max-width:899px){.grain{animation:none;inset:0;opacity:.06}.rv{filter:none}.aurora i:nth-child(3){display:none}}
 
+/* the title and the paragraph under it do not move: no sliding lines, no fade, no drift with the scroll */
+.hero h1,.hero h1 .ln>span,.hero .lead{animation:none!important;transform:none!important;opacity:1!important}
 </style>
 </head>
 <body>
