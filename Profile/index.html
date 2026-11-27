@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aiwa — beyond the app paradigm</title>
-<meta name="description" content="The web was built around applications. Aiwa is an agent that takes a mandate, acts across your applications and carries your context, in your own GitHub.">
+<title>Aiwa — not hands-free, hands together</title>
+<meta name="description" content="AI should carry you to people, not replace you. Aiwa is an intelligence that acts in the interest of one person, from their context, under their authority.">
 <meta name="theme-color" content="#050408">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,6 +276,65 @@ main>section{counter-increment:none}main>section.chapter{counter-increment:sec}m
 @media (max-width:899px){.hero h1{font-size:clamp(30px,9.4vw,80px)}}
 @media (min-width:900px){.hero h1{font-size:clamp(56px,6vw,120px)}}
 </style>
+<style id="airy">
+.band{display:none!important}
+header nav.hn{display:flex;gap:clamp(14px,3vw,34px);margin-left:auto;margin-right:clamp(14px,3vw,34px)}
+header nav.hn a{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--dim);transition:color .3s}
+header nav.hn a:hover{color:var(--text)}
+@media (max-width:560px){header nav.hn a:first-child{display:none}}
+/* the first screen: one sentence, a lot of air */
+.hero{min-height:100svh;align-content:center}
+.hero h1{font-size:clamp(40px,6.6vw,124px)!important;line-height:.94!important;letter-spacing:-.055em!important}
+@media (min-width:900px){.hero{grid-template-columns:1.9fr .6fr!important}}
+@media (max-width:899px){.hero h1{font-size:clamp(34px,10.4vw,84px)!important}}
+.hero .sub{font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin:6px 0 30px}
+.hero .lead{max-width:44ch;font-size:clamp(18px,1.6vw,24px)}
+.hero .orb{transform:translateY(calc(var(--sy,0)*-.14px)) scale(calc(1 - var(--sy,0)/3400));transition:none}
+/* scenes: one idea each, the screen holds it while the scroll plays it */
+.scene{position:relative;height:var(--h,200vh);isolation:isolate}
+.scene .stick{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);overflow:hidden}
+.scene::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(55% 45% at calc(25% + var(--p,0)*50%) calc(60% - var(--p,0)*20%),var(--c,rgba(139,80,216,.35)),transparent 70%);opacity:.9}
+.scene .mono{opacity:clamp(0,calc((var(--p,0) - .02)*8),1);transform:translateY(calc((1 - clamp(0,calc((var(--p,0) - .02)*8),1))*24px))}
+.scene .big{margin:14px 0 0;font-weight:300;font-size:clamp(40px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;max-width:16ch;
+  opacity:min(clamp(0,calc((var(--p,0) - .04)*7),1),clamp(0,calc((.97 - var(--p,0))*12),1));
+  transform:translateY(calc((.5 - var(--p,0))*-16vh))}
+.scene .big em{font-style:normal;font-weight:700}
+.scene .small{max-width:46ch;margin-top:clamp(18px,3vw,36px);font-size:clamp(17px,1.7vw,26px);color:var(--dim);
+  opacity:min(clamp(0,calc((var(--p,0) - .22)*6),1),clamp(0,calc((.96 - var(--p,0))*12),1));
+  transform:translateY(calc((1 - clamp(0,calc((var(--p,0) - .22)*6),1))*30px))}
+.scene .blob{position:absolute;border-radius:50%;filter:blur(2px);z-index:-1;pointer-events:none}
+.scene .blob.a{width:clamp(180px,28vw,420px);aspect-ratio:1;right:6vw;top:14vh;background:radial-gradient(circle at 35% 30%,rgba(244,123,203,.55),rgba(139,80,216,.25) 55%,transparent 72%);transform:translateY(calc(var(--p,0)*-34vh)) scale(calc(.8 + var(--p,0)*.5))}
+.scene .blob.b{width:clamp(90px,14vw,220px);aspect-ratio:1;right:26vw;bottom:10vh;background:radial-gradient(circle at 35% 30%,rgba(85,217,237,.6),rgba(85,217,237,.12) 60%,transparent 74%);transform:translateY(calc(var(--p,0)*22vh))}
+/* the first scene: the words light up one after the other */
+.scene .scrub{font-weight:300;font-size:clamp(30px,5.6vw,100px);line-height:1.04;letter-spacing:-.04em;max-width:22ch;margin:0}
+.scene .scrub .w{display:inline-block;opacity:.12;transform:translateY(.25em);will-change:opacity,transform}
+.scene .scrub em{font-style:normal;font-weight:700}
+.scene .scrub .w.g{background:linear-gradient(100deg,var(--pink),var(--violet) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* what is shown */
+#proof{padding-top:clamp(120px,20vw,280px);padding-bottom:clamp(40px,8vw,120px)}
+#proof h2{font-size:clamp(40px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;font-weight:300;margin:14px 0 30px;max-width:14ch}
+#proof h2 em{font-weight:700}
+#proof .lead{max-width:52ch}
+#proof .go{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+#get,#free{padding-top:clamp(100px,16vw,220px)}
+.more-nav{display:flex;gap:clamp(18px,4vw,60px);flex-wrap:wrap;padding:clamp(60px,10vw,140px) var(--pad) 0}
+.more-nav a{font-size:clamp(28px,5vw,80px);font-weight:300;letter-spacing:-.04em;text-decoration:none;line-height:1;transition:color .3s}
+.more-nav a b{font-weight:700}
+.more-nav a:hover{color:var(--pink)}
+.more-nav small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.dots{position:fixed;right:clamp(10px,2vw,28px);top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:12px}
+.dots i{display:block;width:6px;height:6px;border-radius:50%;background:#4a4160;transition:background .3s,transform .3s}
+.dots i.on{background:var(--pink);transform:scale(1.6)}
+@media (max-width:640px){.dots{display:none}}
+/* a page of its own (product, research) */
+.page-head{padding:clamp(110px,16vw,220px) var(--pad) 0}
+.page-head h1{font-size:clamp(42px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;font-weight:300;margin:12px 0 20px}
+.page-head h1 em{font-weight:700}
+.page-head p.lead{max-width:56ch}
+.static .scene{height:auto;padding:22vh 0}.static .scene .stick{position:static;height:auto}
+.static .scene .big,.static .scene .small,.static .scene .mono,.static .scene .scrub .w{opacity:1!important;transform:none!important}
+@media (prefers-reduced-motion:reduce){.hero .orb{transform:none}}
+</style>
 </head>
 <body>
 
@@ -288,19 +347,19 @@ main>section{counter-increment:none}main>section.chapter{counter-increment:sec}m
 
 <header>
   <b>AIWA</b>
-  <a class="pill" href="#get">Get it free</a>
+  <nav class="hn"><a href="product.html">Product</a><a href="research.html">Research</a></nav><a class="pill" href="#get">Get it free</a>
 </header>
 
 <main>
 <div class="hero">
   <div class="copy">
-    <p class="mono">Aiwa · Beyond the app paradigm</p>
-    <h1>The web was<br>built around<br>apps.<br><em class="g">What if it were</em><br><em class="g">built around you?</em></h1>
-    <p class="lead">Aiwa is one agent, by text or by voice, in your own GitHub. You give it a mandate and ask for the outcome. It sees your screen, acts across your applications, and carries your context to the people you work with.</p>
+    <p class="mono">Aiwa</p>
+    <h1>AI should carry<br>you to people,<br><em class="g">not replace you.</em></h1>
+    <p class="sub">Not hands-free. Hands together.</p>
+    <p class="lead">An intelligence that acts in the interest of one person, from their context, under their authority.</p>
     <div class="cta">
       <a class="btn main" href="#get">Get Aiwa, free</a>
-      <a class="btn line" href="#thesis">The idea</a>
-      <a class="btn line" href="#mandate">See it work</a>
+      <a class="btn line" href="#s1">See why</a>
     </div>
   </div>
   <div class="orb" role="img" aria-label="Aiwa's orb: a glowing glass sphere with ribbons of light, and small orbs around it">
@@ -337,222 +396,41 @@ main>section{counter-increment:none}main>section.chapter{counter-increment:sec}m
   </div>
 </div>
 
-<section id="thesis">
-  <p class="mono">The thesis</p>
-  <h2>Every app owns<br><em class="g">a piece of you.</em></h2>
-  <p class="lead">Mail to talk. Search to find. Apps to work. Platforms to create. Profiles and CVs to introduce yourself. Each keeps its own data, its own rules, its own screen, and you carry your context from one to the next, by hand. Aiwa reverses it: your context is the centre, and the rest is called when it is needed.</p>
-  <div class="paradigm" role="table" aria-label="From the application paradigm to Aiwa">
-    <div class="row head" role="row"><span role="columnheader">Today</span><span role="columnheader">With Aiwa</span></div>
-    <div class="row" role="row"><span>You open an application</span><b>Your context calls a capability</b></div>
-    <div class="row" role="row"><span>Preconfigured agents</span><b>Mandates</b></div>
-    <div class="row" role="row"><span>Messaging</span><b>Contexting</b></div>
-    <div class="row" role="row"><span>A CV, a profile, a form</span><b>A living identity your agent carries</b></div>
-    <div class="row" role="row"><span>A platform that holds your work</span><b>Your own GitHub</b></div>
-    <div class="row" role="row"><span>A global state in the middle</span><b>Exchange between the two parties</b></div>
-  </div>
-</section>
-<section class="chapter" id="ch1">
-  <p class="mono">01 · Intelligence</p>
-  <h2>Bye bye agents.<br><em class="g">Hello mandates.</em></h2>
-  <p class="lead">An agent is a product whose tools are fixed in advance. A mandate is an intention, a perimeter and the right to act inside it. Give one to Aiwa and it works for you, and it wants you to grow, not to depend on it.</p>
-</section>
-<section id="does">
-  <p class="mono">Outcomes</p>
-  <h2 style="font-size:clamp(34px,6.4vw,104px)">You want to know what you can do with it?<br><em class="g">Just ask for the outcome.</em></h2>
-  <div class="grid">
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--pink)" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>Make</span><h3>Structured campaigns, of production and of communication.</h3><p>Ask for an application, a page, a document, and a tailored version for every person it is for: one creation, a version for each of them.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--cyan)" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v5M15 3v5"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></svg>Connect</span><h3>Your services, plugged in.</h3><p>Connect any MCP service. Aiwa reads what its tools can do, uses them, and asks you before anything that changes something.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--amber)" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 13v3l2 1"/></svg>Plan</span><h3>Do it later, or again and again.</h3><p>Plan an action in a few minutes, or on a rhythm, and Aiwa comes back to it by itself.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--violet)" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.5" cy="9" r="3.2"/><circle cx="16" cy="9" r="3.2"/><path d="M3 20c.6-3.2 3-5 5.5-5s4.9 1.8 5.5 5M13.5 15.2c.7-.2 1.4-.3 2-.3 2.5 0 4.9 1.8 5.5 5"/></svg>Meet</span><h3>Matches, personal or professional.</h3><p>Profiles that adapt to whoever looks at them. You choose what is shared, and your own description stays on your phone.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--pink)" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>Speak</span><h3>Say it, or write it.</h3><p>Voice is the easiest way in, not the only one: you can write to it, or let it act on its own. A wake word, a voice that can be interrupted, an interpreter between two languages, and a natural voice that runs on your device.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--cyan)" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.5" r="1.3"/></svg>Keep</span><h3>It stays yours.</h3><p>What you make lives in your own GitHub account, not on a server of ours.</p></div>
-          </div>
-  <p class="lead" style="margin-top:32px;max-width:64ch">Use it as an <b>OS</b>, as an <b>IDE</b>, as a <b>social network</b>, as a <b>matching system</b>, as a <b>teammate</b>, as an <b>agency</b>, as your personal <b>angel</b>. By text or by voice. The most complete AI agent there is.</p>
 
-</section>
-<section id="mandate">
-  <p class="mono">The idea</p>
-  <h2>Not more agents.<br><em class="g">Seven mandates.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:62ch">A lot of the field turns one general model into many specialists: an agent for each job, wired together. Aiwa bets on something else. It stays <b>one agent</b>, and what changes from one situation to the next is its <b>mandate</b>: for whom it acts, who is across from it, what it may share, what it may do, and what it answers for.</p>
-  <div class="grid" style="margin-top:34px">
-    <div class="card"><span class="mono">1 · Your agent</span><h3>It acts for you.</h3><p>By text, by voice or on a schedule: it makes, connects, plans and meets, in your own GitHub.</p></div>
-    <div class="card"><span class="mono">2 · The Angel</span><h3>It prompts you, over days.</h3><p>It watches your momentum and tells you the next move that would raise it.</p></div>
-    <div class="card"><span class="mono">3 · The Interpreter</span><h3>It stands between two people.</h3><p>Two languages, live, so that each hears the other in their own.</p></div>
-    <div class="card"><span class="mono">4 · The Interview</span><h3>It interviews, and is interviewed.</h3><p>Free, with the AI on the other side: each candidate is interviewed by their own agent.</p></div>
-    <div class="card"><span class="mono">5 · The Soldier</span><h3>It prompts you, in seconds.</h3><p>It listens to the conversation and writes on your screen what you could say next.</p></div>
-    <div class="card"><span class="mono">6 · The Phone</span><h3>It calls for you.</h3><p>It places the call, speaks in your name, and keeps the notes as a file of the person.</p></div>
-    <div class="card" style="grid-column:1/-1"><span class="mono">7 · The Portage</span><h3>It is a door to your Aiwa.</h3><p>Anyone you invite talks to an agent of yours that can only talk, and knows of you only what you chose.</p></div>
+<div class="scene" id="s1" style="--h:300vh;--c:rgba(139,80,216,.30)">
+  <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <p class="mono">What it is for</p>
+    <p class="scrub">No, AI is not about working hands-free, or sleeping through meetings. It is about <em>unleashing the full potential of human relationships.</em></p>
   </div>
-  <div class="steps">
-    <div><span class="mono">Not a specialist, not a persona</span><h3>A third kind of context.</h3><p>A specialist is defined by what it knows how to do. A persona, by how it speaks. A mandate is defined by <b>on whose behalf it acts, and within which limits</b>. The same agent, with the same voice, can hold several, one after the other.</p></div>
-    <div><span class="mono">One self, many roles</span><h3>Seven mandates, one Aiwa.</h3><p>The interpreter stands between two people. The interview gives the other side nothing of its conclusion. The door lets a stranger talk, and only talk. The soldier whispers what to say. Nothing else changes: it is still your agent, with the same voice.</p></div>
-    <div><span class="mono">Why it matters</span><h3>The limits belong to the mandate.</h3><p>Minutes, tokens, which files, whether it may act at all: all of it is set once per situation, not once per feature or per tool. That is what makes it safe to let it work without asking you each time.</p></div>
+</div>
+<div class="scene" id="s2" style="--h:210vh;--c:rgba(244,123,203,.26)">
+  <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <p class="mono">Authority</p>
+    <h2 class="big">Bye bye agents. <em class="g">Hello mandates.</em></h2>
+    <p class="small">You give the intention, the perimeter and the permission. Aiwa acts in your name, and only there.</p>
   </div>
-  <p class="mono" style="margin-top:28px;max-width:70ch">A person is not a stack of specialists either. We are one self that takes on roles in front of others. That is the shape Aiwa follows: composition, not partition.</p>
-</section>
-<section id="angel">
-  <p class="mono">The reversal</p>
-  <h2>You prompt the AI.<br><em class="g">Here, it prompts you.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:62ch">Everywhere else you write the prompt and the AI answers. In two of Aiwa's modes the roles swap: <b>the AI prompts you</b>, at two different scales. One watches your whole trajectory, the other sits inside the sentence you are about to say.</p>
-  <div class="steps">
-    <div><span class="mono">The Angel · over days</span><h3>It tells you the next move.</h3><p>The Angel watches one number, your <b>momentum</b>: how much real opportunity your connections hold and how far you have moved it. It ranks the next steps by how much they would raise it (write this draft, send that one, follow up there) and tells you which, when, and why. You decide.</p></div>
-    <div><span class="mono">The Soldier · in seconds</span><h3>It whispers what to say.</h3><p>The Soldier listens to you and the person across from you, and writes on your screen what you could say next, as the conversation runs. It says nothing aloud and sends nothing. The words are yours; the prompt is its.</p></div>
-    <div><span class="mono">It learns</span><h3>It remembers what worked.</h3><p>Each skill and scenario it runs is recorded and judged later, by what came back. What gets answers is used more, what does not is dropped. Your will sets the weights: which kinds of opportunity matter to you.</p></div>
+</div>
+<div class="scene" id="s3" style="--h:210vh;--c:rgba(85,217,237,.22)">
+  <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <p class="mono">Context</p>
+    <h2 class="big">Contexting is the new <em class="g">messaging.</em></h2>
+    <p class="small">Do not make two AIs talk. Let them share the context that matters, as far as you decide.</p>
   </div>
-  <p class="mono" style="margin-top:28px;max-width:70ch">The score is yours, on your phone, built from your own files. Nobody ranks you.</p>
-</section>
-<section class="chapter" id="ch2">
-  <p class="mono">02 · Context</p>
-  <h2>One person.<br><em class="g">Every context.</em></h2>
-  <p class="lead">Do not make two AIs talk: let them share the context that matters. Your identity is not a CV, it is a living context that your own agent carries, shares as far as you decide, and uses to meet others.</p>
-</section>
-<section id="talk">
-  <div class="talk">
-    <div>
-      <p class="mono">Contexting</p>
-      <h2>Contexting<br>is the new<br><em class="g">messaging.</em></h2>
-      <p class="lead" style="margin-top:24px;max-width:46ch">You no longer write messages. You give context: who the agent acts for, who is across from it, what it may share, what it may do. Then it acts, and the relationship moves.</p>
-    </div>
-    <div>
-      <div class="chat">
-        <div class="msg aiwa" style="--i:0"><small class="mono">Aiwa</small>There's a lot of movement around you. One of them even pays in Aiwa. Want me to send them tailored applications?</div>
-        <div class="msg you" style="--i:1"><small class="mono">You</small>Aiwa, I need connectors for Slack, Gmail, my calendar and Notion, please.</div>
-        <div class="msg aiwa" style="--i:2"><small class="mono">Aiwa</small>For the interface, do you want me to take inspiration from an existing SaaS?</div>
-        <div class="msg you" style="--i:3"><small class="mono">You</small>No. Make something truly innovative, please.</div>
-        <div class="msg aiwa" style="--i:4"><small class="mono">Aiwa</small>Okay. Give me ten minutes.</div>
-      </div>
-      <p class="mono note">Examples of what you can ask, written for this page. Not a recording.</p>
-    </div>
+</div>
+<div class="scene" id="s4" style="--h:210vh;--c:rgba(255,154,85,.20)">
+  <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <p class="mono">Growth</p>
+    <h2 class="big">An AI that wants you <em class="g">to grow.</em></h2>
+    <p class="small">Not more dependence. More capability, and more of the people you can reach.</p>
   </div>
-</section>
-<section id="arm">
-  <p class="mono">Not a CRM</p>
-  <h2>Forget the CRM.<br><em class="g">Meet the ARM.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:62ch">A CRM is a database you feed by hand, and that nobody keeps up. An <b>ARM</b>, <b>Agent Relationship Management</b>, is an agent that works your relationships for you: it finds the people worth reaching, writes the first message, remembers what came back, and tells you what to do next. Your contacts are not rows in a table. They are a momentum.</p>
-</section>
-<section id="interview">
-  <p class="mono">Recruit</p>
-  <h2>Interviews, free.<br><em class="g">With the opposite AI.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:62ch">A recruiter makes a key. Every candidate is interviewed by <b>their own agent</b>, and only a sealed conclusion reaches the recruiter. No platform to build, no server to host, no fee per candidate: the work is done by the candidates' own agents, on their own devices.</p>
-  <div class="steps">
-    <div><span class="mono">1 · Make a key</span><h3>A title, a brief, a duration.</h3><p>Name the position, say what you look for and what to ask, choose how long the interview lasts and how many days the answers are kept. The key is one short line. Make it in the app, or just tell Aiwa: it does it for you.</p></div>
-    <div><span class="mono">2 · Share it</span><h3>Anywhere, or as a button.</h3><p>Paste it in a message, an advert, a page. Or have it as an <b>Interview</b> button on your profile, one button per open position: you choose which ones show, and Aiwa can add or remove them when you ask.</p></div>
-    <div><span class="mono">3 · The candidate's agent asks</span><h3>By voice or by text.</h3><p>It reads your brief, interviews its owner for the time you set, and uses the file the candidate attached (a CV) to ask better questions. The candidate chose to take it.</p></div>
-    <div><span class="mono">4 · A sealed conclusion</span><h3>Only you can read it.</h3><p>The conclusion and the file are sealed with a key made for this interview, then left for you. The candidate sees nothing of it. Delete the key and nothing sent to it can ever be read again.</p></div>
-    <div><span class="mono">5 · You read them ranked</span><h3>In Search, under Candidates.</h3><p>Each candidate with a score, a summary, strengths and reservations, and the attached file. What is older than the days you chose is erased by itself, and you can erase one candidate at any time.</p></div>
-  </div>
-  <div class="big">
-    <div class="hot">0 servers <span>nothing to host, nothing to run</span></div>
-    <div>0 fees <span>free for the recruiter, however many candidates</span></div>
-    <div>Any number <span>each candidate brings their own agent</span></div>
-    <div>Sealed <span>one key per interview, erased on a date you choose</span></div>
-  </div>
-  <p class="mono" style="margin-top:28px;max-width:70ch">A system of recruitment, AI to AI, that you set up in a minute. The score is an aid to your decision, not the decision: the agent judges only what your brief asks, and never age, sex, origin, religion, health or any other protected trait.</p>
+</div>
+<section id="proof">
+  <p class="mono">Proof, today</p>
+  <h2>Interviews, free. <em class="g">With the opposite AI.</em></h2>
+  <p class="lead">A recruiter makes a key. Every candidate is interviewed by their own agent, and only a sealed conclusion reaches the recruiter. No platform, no server, no fee per candidate.</p>
   <div id="positions" class="positions"></div>
-  <p class="mono" id="positions-empty" style="margin-top:36px;max-width:70ch">No open position on this page yet. A key is made in the app (Search, Candidates), or just by asking Aiwa: “open an interview for a baker, ten minutes, and put it on my profile”.</p>
-  <p class="cta" style="margin-top:22px"><a class="btn line" href="#get">Get Aiwa to make yours</a></p>
-</section>
-<section id="portage">
-  <p class="mono">Portage</p>
-  <h2>A door to your Aiwa.<br><em class="g">Anyone you invite can talk to it.</em></h2>
-  <div class="face" id="portageFace" aria-hidden="true"></div>
-  <p class="lead" style="margin-top:28px;max-width:62ch">You invite someone with a name, a first message and a time. They get a personal link. They open it and see Aiwa's face: they talk, by voice or in writing, to an agent of yours that <b>can only talk</b>. No account, nothing to install.</p>
-  <div class="steps">
-    <div><span class="mono">Safe by design</span><h3>It cannot act.</h3><p>No action on your phone, no account, no other file. It knows Aiwa, and of you only the files you choose for each guest. A guest's words never change its rules.</p></div>
-    <div><span class="mono">Yours alone</span><h3>One link, one person.</h3><p>The first browser that opens a link is bound to it, so it cannot be passed on. You set the time in all, you can release or remove a link whenever you want.</p></div>
-    <div><span class="mono">Remembered</span><h3>A file per client.</h3><p>Each conversation is kept in a private repository of yours, in Search under Portage, and erased after the days you choose. When they return, the agent picks up the thread. What they suggest is gathered as proposals, for you to read.</p></div>
-  </div>
-  <p class="mono" style="margin-top:28px;max-width:70ch">Your phone does the answering, so Aiwa stays open and connected. What travels between the page and your phone is sealed.</p>
-</section>
-<section class="chapter" id="ch3">
-  <p class="mono">03 · Creation</p>
-  <h2>Create without<br><em class="g">a platform.</em></h2>
-  <p class="lead">What you make lives in your own GitHub: versioned, portable, yours. The agent plugs into any MCP, and acts on your phone and your computer.</p>
-</section>
-<section id="grow">
-  <p class="mono">Built to grow</p>
-  <h2>Your GitHub.<br><em class="g">Any MCP.</em></h2>
-  <div class="grid">
-    <div class="card"><span class="mono">Core</span><h3>Rules apart from screens.</h3><p>Every rule of the product is written once, in a core with no Android and no network, and tested on its own. Each system (Android, Windows, macOS, Linux) adds only what belongs to it.</p></div>
-    <div class="card"><span class="mono">Connectors</span><h3>Open to any service.</h3><p>Any MCP connector plugs in without changing the application: Aiwa reads what its tools can do and uses them.</p></div>
-    <div class="card"><span class="mono">Protocol</span><h3>A protocol of its own.</h3><p>The layer for value is separate JavaScript, independent of the application, and it runs the same on a phone, a computer or a browser.</p></div>
-  </div>
-</section>
-<section id="devices">
-  <p class="mono">Your devices</p>
-  <h2>It looks. <em class="g">It acts.</em></h2>
-  <div class="split">
-    <div><span class="mono"><svg class="ic" style="color:var(--cyan)" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.500 12 5.500 21.500 12 21.500 12 18 18.500 12 18.500 2.500 12 2.500 12z"/><circle cx="12" cy="12" r="3"/></svg>See</span><h3>Your screen, your camera.</h3><p>Ask it to look: it sees your whole screen, or what your camera shows, and answers about it. With Claude or ChatGPT; nothing is sent until you speak.</p></div>
-    <div><span class="mono"><svg class="ic" style="color:var(--amber)" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6z"/><path d="M13 12l5 5"/></svg>Act</span><h3>Your phone and your computer.</h3><p>It opens your applications, taps and clicks, types, scrolls and presses keys, as you would, without asking you each time. On the phone you turn it on yourself, once, in the accessibility settings.</p></div>
-  </div>
-</section>
-<section class="chapter" id="ch4">
-  <p class="mono">04 · Exchange</p>
-  <h2>Exchange is<br><em class="g">bilateral.</em></h2>
-  <p class="lead">A contract needs two parties, so its authority belongs to those two, not to a global state in the middle. It is the youngest part of Aiwa, and the most ambitious.</p>
-</section>
-<section id="protocol">
-  <p class="mono">Protocol</p>
-  <h2>Value moves. <em class="g">No global state.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:60ch">A global-state-free value transfer and accrual system: no chain everyone must agree on, no server that holds the truth. An agnostic JavaScript execution infrastructure for an interplanetary economy and the mass adoption of asset tokenisation. Mars-ready distributed networks start with an agent that is its own node.</p>
-  <details class="more"><summary>The six parts of the protocol</summary>
-  <div class="grid">
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--pink)" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14M14 4l4 4-4 4"/><path d="M20 16H6M10 12l-4 4 4 4"/></svg>Transfer</span><h3>Signed actions, not a ledger.</h3><p>Value moves by actions each person signs. Whoever needs a balance replays the actions it concerns and gets the same answer as everyone else.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--cyan)" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16l2 2 4-4"/></svg>Contracts</span><h3>Smart contracts as plain reducers.</h3><p>A contract is a rule: a state and an event give the next state. Tokens, subscriptions, any agreement is written the same way and checked by whoever replays it.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--amber)" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4c-2 0-3 1-3 3v2c0 1.5-.8 3-2 3 1.200 0 2 1.500 2 3v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1.500.8 3 2 3-1.200 0-2 1.500-2 3v2c0 2-1 3-3 3"/></svg>JavaScript</span><h3>One agnostic runtime.</h3><p>Pure JavaScript, so the same contract runs on a phone, a computer, a browser, or inside an agent. No virtual machine of its own, no network to join first.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--violet)" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6.5" rx="7" ry="3"/><path d="M5 6.5v5c0 1.700 3.100 3 7 3s7-1.300 7-3v-5"/><path d="M5 11.500v5c0 1.700 3.100 3 7 3s7-1.300 7-3v-5"/></svg>Tokenisation</span><h3>Make assets liquid.</h3><p>Tokenisation exists to make what is hard to sell easy to exchange. The legal layer stays outside the protocol, where law lives, and plugs in when a legislator is connected.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--pink)" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.500 20.500h17"/><path d="M5 16l4.500-5 3.500 3L19.500 6"/><path d="M15 6h4.500v4.500"/></svg>Accrual</span><h3>Value that builds up.</h3><p>Payments, access and rewards accrue to the people they belong to, verified by replaying the record rather than trusting a middleman.</p></div>
-    <div class="card"><span class="mono"><svg class="ic" style="color:var(--cyan)" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="4.500" cy="5.500" r="1.800"/><circle cx="19.500" cy="5.500" r="1.800"/><circle cx="4.500" cy="18.500" r="1.800"/><circle cx="19.500" cy="18.500" r="1.800"/><path d="M6 7l4 3.500M18 7l-4 3.500M6 17l4-3.500M18 17l-4-3.500"/></svg>Agent-centric</span><h3>The agent is the node.</h3><p>Each person's agent holds, checks and exchanges for them. Society is the sum of agents that agree on rules, not of platforms that own the data.</p></div>
-  </div>
-  </details>
-  <p class="mono" style="margin-top:28px"><a href="https://github.com/theodoreyong9/Aiwa_public/blob/main/docs/yellow-paper.md">Read the yellow paper</a></p>
-</section>
-<section id="yellowpaper">
-  <p class="mono">Yellow paper</p>
-  <h2>The protocol, <em class="g">written down.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:60ch">Causal coordination and local value accrual for partition-tolerant networks. A formal specification, with its reference implementation.</p>
-  <details class="more"><summary>What it says, chapter by chapter</summary>
-  <div class="grid">
-    <div class="card"><span class="mono">Coordination</span><h3>Every participant keeps its own log.</h3><p>Signed events name their causal parents; nobody needs everybody else's log. Participants operate while disconnected, and reconciliation is deferred, not required.</p></div>
-    <div class="card"><span class="mono">Accrual</span><h3>Value is created locally.</h3><p>Gated once by an external commitment, an irreversible burn on Solana, and thereafter driven by real sequential computation, never by a shared clock.</p></div>
-  </div>
-  <div class="how">
-    <div><span class="mono">Pillar 1 · §6 — Progression</span><p>How does a domain show that time (work) has passed, without a clock?</p></div>
-    <div><span class="mono">Pillar 2 · §7 — Conservation</span><p>Who owns what, and how is it moved without being spent twice?</p></div>
-    <div><span class="mono">Pillar 3 · §8 — Mirror</span><p>What has a domain seen of the others, verifiably?</p></div>
-  </div>
-  <p class="mono" style="margin-top:28px">No global synchronized state, no consensus quorum, no trusted server. The one external dependency is the burn that opens accrual; once it is made, a domain works offline.</p>
-  <div class="how">
-    <div><span class="mono">I — Foundations</span><p>Identity, events and the log, signed actions.</p></div>
-    <div><span class="mono">II — The three pillars</span><p>Progression, conservation, mirror.</p></div>
-    <div><span class="mono">III — Creating value</span><p>The genesis commitment, accrual, the creator fee, what a third party can read.</p></div>
-    <div><span class="mono">IV — Agreement without a clock</span><p>Partition, branches and conflicts; bounded storage; history recovery.</p></div>
-    <div><span class="mono">V — Programs and applications</span><p>Contracts; bundles and sandboxed execution.</p></div>
-    <div><span class="mono">VI — Informational mechanisms</span><p>Observation: causal tick, hardware roots, relative rate.</p></div>
-    <div><span class="mono">VII — Assessment</span><p>Threats and what answers them; limits and open problems.</p></div>
-  </div>
-  </details>
-  <div class="cta" style="margin-top:32px"><a class="btn main" href="https://github.com/theodoreyong9/Aiwa_public/blob/main/docs/yellow-paper.md">Read the yellow paper</a></div>
-</section>
-<section id="direction">
-  <p class="mono">Direction · not shipped yet</p>
-  <h2>Where it is going.<br><em class="g">Said plainly.</em></h2>
-  <p class="lead">What is above works today. What follows is the direction, and it is not a promise that it is done.</p>
-  <div class="steps">
-    <div><span class="mono">Software that adapts</span><h3>Interfaces made on demand.</h3><p>The idea: you stop searching for the right application, and the tool takes the shape of the need. Today the agent acts through the applications that exist. Generating the interface itself is the next step, not a feature.</p></div>
-    <div><span class="mono">One memory</span><h3>Across applications, governed by you.</h3><p>Today the agent keeps its notes, your files and your targets in your own GitHub. A memory that crosses every application, with consent for each context shared, is ahead of us.</p></div>
-    <div><span class="mono">A bilateral protocol</span><h3>At the scale of a network.</h3><p>The protocol is written, with its yellow paper, and the wallet is in the application. A network of people exchanging value this way is not there yet.</p></div>
-  </div>
-</section>
-<section id="free">
-  <p class="mono">Yours</p>
-  <h2>Free. And <em class="g">yours.</em></h2>
-  <div class="big">
-    <div class="hot">100% free <span>no plan, no paywall</span></div>
-    <div>No ads <span>none, anywhere</span></div>
-    <div>No data sales <span>we never sell it</span></div>
-    <div>Your GitHub <span>everything you produce is yours</span></div>
-  </div>
+  <p class="mono" id="positions-empty" style="margin-top:36px;max-width:70ch">No open position on this page yet. Ask Aiwa: “open an interview for a baker, ten minutes, and put it on my profile”.</p>
+  <div class="go"><a class="btn main" href="#get">Get Aiwa</a><a class="btn line" href="product.html">Everything it does today</a></div>
 </section>
 <section id="get">
   <p class="mono">Everywhere</p>
@@ -568,20 +446,10 @@ main>section{counter-increment:none}main>section.chapter{counter-increment:sec}m
   <p class="mono" style="margin-top:22px">Each build installs over the previous one.</p>
   <p class="mono" style="margin-top:10px">No iPhone version.</p>
 </section>
-<section id="live">
-  <p class="mono">Live</p>
-  <h2>On air, <em class="g">right here.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:60ch">Aiwa is out: you can download it above, free. The live is how it keeps growing. It is built live, by voice, with Aiwa itself: I speak, the agent writes, tests and ships the next version, and you watch it happen. The audience takes part: what gets built next is decided together, in the open.</p>
-  <div class="how">
-    <div><span class="mono">1 — Ask</span><p>A feature is asked out loud, in plain words.</p></div>
-    <div><span class="mono">2 — Build</span><p>Aiwa writes the code, runs the tests and publishes the build, on screen.</p></div>
-    <div><span class="mono">3 — Decide together</span><p>The people watching say what should come next.</p></div>
-  </div>
-  <div class="stage" id="stage">
-    <iframe id="stream" title="Aiwa live" allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
-    <div class="off" id="off"><video id="loopv" muted loop playsinline preload="metadata" hidden></video><span class="mono">Off air</span><b>Not live right now.</b><p>The latest film of Aiwa plays here in the meantime. When the next build starts live, the live takes its place by itself, no link to follow.</p></div>
-  </div>
-</section>
+<div class="more-nav">
+  <a href="product.html"><small>Today</small>The <b>product</b> →</a>
+  <a href="research.html"><small>Tomorrow</small>The <b>research</b> →</a>
+</div>
 </main>
 
 <footer>
@@ -832,5 +700,49 @@ if(fine&&!reduce){ var cur=el('div','cur'); body.appendChild(cur); var cx=0,cy=0
 </script>
 <button id="jump" type="button" aria-label="Scroll" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;width:46px;height:46px;border-radius:50%;border:1px solid rgba(244,239,230,.18);background:rgba(17,15,31,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#F4EFE6;font:20px/1 system-ui;cursor:pointer">↓</button>
 <script>(function(){var b=document.getElementById('jump');if(!b)return;function max(){return document.documentElement.scrollHeight-innerHeight}function upd(){b.textContent=(scrollY>max()/2)?'↑':'↓'}addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();b.onclick=function(){var up=scrollY>max()/2;scrollTo({top:up?0:max(),behavior:'smooth'})}})();</script>
+<script id="scenes">
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var scenes=[].slice.call(document.querySelectorAll('.scene'));
+if(reduce){document.documentElement.classList.add('static');document.body.classList.add('static');}
+/* the words of a sentence, one by one (the bold, coloured ones keep their colour) */
+function words(el){
+  (function walk(node,cls){
+    [].slice.call(node.childNodes).forEach(function(n){
+      if(n.nodeType===3){
+        var frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function(t){
+          if(!t) return;
+          if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(' '));return;}
+          var s=document.createElement('span');s.className='w'+(cls?' '+cls:'');s.textContent=t;frag.appendChild(s);
+        });
+        node.replaceChild(frag,n);
+      } else if(n.nodeType===1){ walk(n,n.tagName==='EM'?'g':cls); }
+    });
+  })(el,'');
+  return [].slice.call(el.querySelectorAll('.w'));
+}
+var items=scenes.map(function(s){var sc=s.querySelector('.scrub');return {el:s,w:sc&&!reduce?words(sc):[]};});
+var dots=null;
+if(scenes.length>1&&!reduce){dots=document.createElement('div');dots.className='dots';dots.setAttribute('aria-hidden','true');scenes.forEach(function(){dots.appendChild(document.createElement('i'));});document.body.appendChild(dots);}
+var ticking=false;
+function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+function frame(){
+  ticking=false; if(reduce) return;
+  var vh=innerHeight, cur=-1;
+  items.forEach(function(it,i){
+    var r=it.el.getBoundingClientRect(), span=Math.max(1,r.height-vh), p=clamp(-r.top/span,0,1);
+    it.el.style.setProperty('--p',p.toFixed(4));
+    if(r.top<vh*.5&&r.bottom>vh*.5) cur=i;
+    var n=it.w.length;
+    if(n){ var reveal=clamp(p*1.25-.06,0,1)*(n+3);
+      it.w.forEach(function(w,k){ var o=clamp(reveal-k,0,1); w.style.opacity=(.12+.88*o).toFixed(3); w.style.transform='translateY('+((1-o)*.25).toFixed(3)+'em)'; }); }
+  });
+  if(dots) [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);});
+}
+function on(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
+addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); frame();
+})();
+</script>
 </body>
 </html>
