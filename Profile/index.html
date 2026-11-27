@@ -936,5 +936,11 @@ addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); fra
 /* The accessories as 3D objects: read aiwa-acc.bin, turn with the head, light, sort, draw triangles (the same maths as the Kotlin renderer). */
 
 </script>
+<script>
+/* « See why » lands inside the scene, once its words have appeared: at the very top of a tall scene nothing is shown yet. */
+document.querySelectorAll('a[href^="#s"]').forEach(function(a){a.addEventListener('click',function(e){
+  var t=document.querySelector(a.getAttribute('href'));if(!t||document.documentElement.classList.contains('static')||document.body.classList.contains('static'))return;
+  e.preventDefault();var y=t.getBoundingClientRect().top+scrollY+Math.max(0,t.offsetHeight-innerHeight)*.34;scrollTo({top:y,behavior:'smooth'});});});
+</script>
 </body>
 </html>
