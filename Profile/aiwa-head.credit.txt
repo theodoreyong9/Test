@@ -1,0 +1,3 @@
+The head of the agent is adapted from "Lisa - Woman Head with BlendShapes" by skullvez
+(https://sketchfab.com/3d-models/lisa-woman-head-with-blendshapes-7670d1c2742b4188a989f1b3205a628b),
+licensed CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/). Its shape and skin texture are theirs; the lighting and animation are ours.
