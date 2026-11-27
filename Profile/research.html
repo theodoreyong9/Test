@@ -395,6 +395,11 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 @media (prefers-reduced-motion:reduce){.trk{white-space:normal;-webkit-mask-image:none;mask-image:none}.trk>div{animation:none;flex-wrap:wrap}}
 #more .card{max-width:60ch}
 #also .go{display:flex;margin-top:clamp(34px,5vw,60px)}
+.tuples{margin-top:clamp(30px,5vw,56px);display:grid;gap:0}
+.tuples div{display:grid;grid-template-columns:minmax(120px,.28fr) 1fr;gap:clamp(12px,3vw,40px);align-items:baseline;padding:16px 0}
+.tuples b{font-size:clamp(22px,3vw,40px);font-weight:300;letter-spacing:-.03em}
+.tuples span{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.06em;color:var(--dim);line-height:1.7}
+@media (max-width:640px){.tuples div{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
 <body>
@@ -414,9 +419,30 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 <main>
 <div class="page-head">
   <p class="mono">Research</p>
-  <h1>The protocol,<br><em class="g">written down.</em></h1>
-  <p class="lead">A value transfer with no global state, and the yellow paper that specifies it.</p>
+  <h1>How it is built,<br><em class="g">written down.</em></h1>
+  <p class="lead">The structure of a mandate, and the protocol: a value transfer with no global state, and the yellow paper that specifies it.</p>
 </div>
+<section id="structure">
+  <p class="mono">Mandates, as a structure</p>
+  <h2>Seven points<br><em class="g">in one space.</em></h2>
+  <p class="lead" style="margin-top:28px;max-width:62ch">A mandate is a tuple: <b>for whom, facing, context, rights, tempo, answers to</b>. Four rules say which tuples can exist, so the number of mandates is something that can be explained, and a new one is placed in the space before it is built.</p>
+  <div class="tuples">
+    <div><b>Agent</b><span>you · the world · all your files · act · on demand · you</span></div>
+    <div><b>Angel</b><span>you · yourself · your momentum · suggest · over days · you</span></div>
+    <div><b>Soldier</b><span>you · a person · your momentum · suggest · live · you</span></div>
+    <div><b>Interpreter</b><span>both speakers · a person · the words said · translate · live · each speaker</span></div>
+    <div><b>Interview</b><span>each its own · an agent · a brief · conclude · time-boxed · each party</span></div>
+    <div><b>Call</b><span>you · a person on the line · what you gave · speak · live · you</span></div>
+    <div><b>Portage</b><span>you · a guest · what you opened · answer · while invited · you</span></div>
+  </div>
+  <div class="steps">
+    <div><span class="mono">Rule 1 · Responsibility</span><h3>Whoever it acts for answers for it.</h3><p>Owner for owner, each speaker for both speakers, each party for its own.</p></div>
+    <div><span class="mono">Rule 2 · Least privilege</span><h3>It reads no more than its rights need.</h3><p>Acting reads everything. Suggesting reads the momentum and the conversation. Translating reads only the words.</p></div>
+    <div><span class="mono">Rule 3 · Target</span><h3>Rights go toward the one they are for.</h3><p>Acting is on the world, never on a person. A person across is spoken to, translated, or watched for you.</p></div>
+    <div><span class="mono">Rule 4 · Clock</span><h3>A tempo is the tempo of something.</h3><p>On demand keeps time with the world, days with you, live with a person, time-boxed with an agent, standing with a guest.</p></div>
+  </div>
+  <p class="mono" style="margin-top:34px;max-width:70ch">Of 6,750 combinations, 63 pass the four rules and 7 are in use. The rights are the master axis: they settle for whom, the context and who answers.</p>
+</section>
 <section id="protocol">
   <p class="mono">Protocol</p>
   <h2>Value moves. <em class="g">No global state.</em></h2>

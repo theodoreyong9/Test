@@ -395,6 +395,11 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 @media (prefers-reduced-motion:reduce){.trk{white-space:normal;-webkit-mask-image:none;mask-image:none}.trk>div{animation:none;flex-wrap:wrap}}
 #more .card{max-width:60ch}
 #also .go{display:flex;margin-top:clamp(34px,5vw,60px)}
+.tuples{margin-top:clamp(30px,5vw,56px);display:grid;gap:0}
+.tuples div{display:grid;grid-template-columns:minmax(120px,.28fr) 1fr;gap:clamp(12px,3vw,40px);align-items:baseline;padding:16px 0}
+.tuples b{font-size:clamp(22px,3vw,40px);font-weight:300;letter-spacing:-.03em}
+.tuples span{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.06em;color:var(--dim);line-height:1.7}
+@media (max-width:640px){.tuples div{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
 <body>
@@ -441,7 +446,7 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
     <div class="card"><span class="mono">3 · The Interpreter</span><h3>It stands between two people.</h3><p>Two languages, live, so that each hears the other in their own.</p></div>
     <div class="card"><span class="mono">4 · The Interview</span><h3>It interviews, and is interviewed.</h3><p>Free, with the AI on the other side: each candidate is interviewed by their own agent.</p></div>
     <div class="card"><span class="mono">5 · The Soldier</span><h3>It prompts you, in seconds.</h3><p>It listens to the conversation and writes on your screen what you could say next.</p></div>
-    <div class="card"><span class="mono">6 · The Phone</span><h3>It calls for you.</h3><p>It places the call, speaks in your name, and keeps the notes as a file of the person.</p></div>
+    <div class="card"><span class="mono">6 · The Call</span><h3>It calls for you.</h3><p>It places the call, speaks in your name, and keeps the notes as a file of the person.</p></div>
     <div class="card" style="grid-column:1/-1"><span class="mono">7 · The Portage</span><h3>It is a door to your Aiwa.</h3><p>Anyone you invite talks to an agent of yours that can only talk, and knows of you only what you chose.</p></div>
   </div>
   <div class="steps">
