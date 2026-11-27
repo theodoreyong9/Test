@@ -400,6 +400,21 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 .tuples b{font-size:clamp(22px,3vw,40px);font-weight:300;letter-spacing:-.03em}
 .tuples span{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.06em;color:var(--dim);line-height:1.7}
 @media (max-width:640px){.tuples div{grid-template-columns:1fr;gap:4px}}
+.composer{margin-top:clamp(30px,5vw,56px);display:grid;gap:clamp(22px,3.4vw,40px)}
+.presets,.chips{display:flex;flex-wrap:wrap;gap:10px}
+.axes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,3vw,34px) clamp(24px,4vw,56px)}
+.axis{display:grid;gap:12px;align-content:start}
+.chip{font:inherit;font-size:clamp(14px,1.3vw,17px);color:var(--text);background:rgba(255,255,255,.06);border:0;border-radius:999px;padding:.6em 1.15em;cursor:pointer;transition:background .3s,transform .3s}
+.chip:hover{background:rgba(255,255,255,.12)}
+.chip[aria-pressed="true"]{background:linear-gradient(100deg,var(--pink),var(--violet));color:#fff}
+.chip:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.verdict{min-height:120px;padding-top:6px}
+.verdict b{display:block;font-weight:300;font-size:clamp(30px,5vw,72px);letter-spacing:-.04em;line-height:1}
+.verdict b.yes{background:linear-gradient(100deg,var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.14em}
+.verdict b.no{color:var(--amber)}
+.verdict p{margin:12px 0 0;color:var(--dim);max-width:60ch}
+.verdict ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px;max-width:64ch;color:#c9c1d8}
+.verdict li .mono{margin-right:10px;color:var(--amber)}
 </style>
 </head>
 <body>
@@ -424,24 +439,76 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 </div>
 <section id="structure">
   <p class="mono">Mandates, as a structure</p>
-  <h2>Seven points<br><em class="g">in one space.</em></h2>
-  <p class="lead" style="margin-top:28px;max-width:62ch">A mandate is a tuple: <b>for whom, facing, context, rights, tempo, answers to</b>. Four rules say which tuples can exist, so the number of mandates is something that can be explained, and a new one is placed in the space before it is built.</p>
-  <div class="tuples">
-    <div><b>Agent</b><span>you · the world · all your files · act · on demand · you</span></div>
-    <div><b>Angel</b><span>you · yourself · your momentum · suggest · over days · you</span></div>
-    <div><b>Soldier</b><span>you · a person · your momentum · suggest · live · you</span></div>
-    <div><b>Interpreter</b><span>both speakers · a person · the words said · translate · live · each speaker</span></div>
-    <div><b>Interview</b><span>each its own · an agent · a brief · conclude · time-boxed · each party</span></div>
-    <div><b>Call</b><span>you · a person on the line · what you gave · speak · live · you</span></div>
-    <div><b>Portage</b><span>you · a guest · what you opened · answer · while invited · you</span></div>
+  <h2>A space of mandates.<br><em class="g">Compose one.</em></h2>
+  <p class="lead" style="margin-top:28px;max-width:62ch">A mandate is a tuple: <b>for whom, facing, context, rights, tempo, answers to</b>. The rights are a set. Five rules say which tuples can exist, so a new mandate is placed in the space before anything is built. Pick a coordinate for each, or start from one that exists.</p>
+  <div class="composer" id="composer">
+    <div class="presets" id="presets"></div>
+    <div class="axes" id="axes"></div>
+    <div class="verdict" id="verdict" role="status" aria-live="polite"></div>
   </div>
   <div class="steps">
     <div><span class="mono">Rule 1 · Responsibility</span><h3>Whoever it acts for answers for it.</h3><p>Owner for owner, each speaker for both speakers, each party for its own.</p></div>
-    <div><span class="mono">Rule 2 · Least privilege</span><h3>It reads no more than its rights need.</h3><p>Acting reads everything. Suggesting reads the momentum and the conversation. Translating reads only the words.</p></div>
-    <div><span class="mono">Rule 3 · Target</span><h3>Rights go toward the one they are for.</h3><p>Acting is on the world, never on a person. A person across is spoken to, translated, or watched for you.</p></div>
-    <div><span class="mono">Rule 4 · Clock</span><h3>A tempo is the tempo of something.</h3><p>On demand keeps time with the world, days with you, live with a person, time-boxed with an agent, standing with a guest.</p></div>
+    <div><span class="mono">Rule 2 · At least one right</span><h3>A mandate gives something to do.</h3><p>No right, no mandate.</p></div>
+    <div><span class="mono">Rule 3 · Least privilege</span><h3>It reads no more than its widest right needs.</h3><p>Acting reads everything. Suggesting reads the momentum and the conversation. Translating reads only the words.</p></div>
+    <div><span class="mono">Rule 4 · Target</span><h3>Every right goes toward the one it is for.</h3><p>Acting is on the world, never on a person. A person across is spoken to, translated, or watched for you.</p></div>
+    <div><span class="mono">Rule 5 · Clock</span><h3>A tempo is the tempo of something.</h3><p>On demand keeps time with the world and with you, days with you, live with a person, time-boxed with an agent, standing with a guest.</p></div>
   </div>
-  <p class="mono" style="margin-top:34px;max-width:70ch">Of 6,750 combinations, 63 pass the four rules and 7 are in use. The rights are the master axis: they settle for whom, the context and who answers.</p>
+  <p class="mono" style="margin-top:34px;max-width:70ch" id="structure-count">Of 70,875 combinations, 177 pass the rules and 7 are in use. The rights settle for whom, who answers and what is across. The tempo says something that what is across does not.</p>
+  <script>
+  (function(){
+    var AX=[['forWhom','For whom',['owner','both','each'],{owner:'You',both:'Both speakers',each:'Each its own'}],
+            ['facing','Facing',['nobody','owner','person','agent','guest'],{nobody:'The world',owner:'You',person:'A person',agent:'An agent',guest:'A guest'}],
+            ['context','Context',['words','given','brief','momentum','all'],{words:'The words said',given:'What was given',brief:'A brief',momentum:'Your momentum',all:'Everything of yours'}],
+            ['rights','Rights',['act','suggest','translate','conclude','speak','answer'],{act:'Act',suggest:'Suggest',translate:'Translate',conclude:'Conclude',speak:'Speak',answer:'Answer'}],
+            ['tempo','Tempo',['demand','days','live','timeboxed','standing'],{demand:'On demand',days:'Over days',live:'Live',timeboxed:'Time-boxed',standing:'While invited'}],
+            ['answers','Answers to',['owner','speaker','party'],{owner:'You',speaker:'Each speaker',party:'Each party'}]];
+    var LEVEL={words:1,given:2,brief:3,momentum:4,all:5};
+    var WIDE={act:5,suggest:4,translate:1,conclude:3,speak:2,answer:2};
+    var TOWARD={act:['nobody','owner'],suggest:['owner','person'],translate:['person'],conclude:['agent'],speak:['person'],answer:['guest']};
+    var CLOCK={nobody:['demand'],owner:['demand','days'],person:['live'],agent:['timeboxed'],guest:['standing']};
+    var ACC={owner:'owner',both:'speaker',each:'party'};
+    var RULES=[
+      ['responsibility','Whoever the agent acts for answers for it.',function(t){return ACC[t.forWhom]===t.answers;}],
+      ['some-rights','A mandate gives at least one right.',function(t){return t.rights.length>0;}],
+      ['least-privilege','It reads no more of your world than its widest right needs.',function(t){return t.rights.length>0&&LEVEL[t.context]<=Math.max.apply(null,t.rights.map(function(r){return WIDE[r];}));}],
+      ['target','Every right goes toward the one it is for: acting on the world, never on a person.',function(t){return t.rights.every(function(r){return TOWARD[r].indexOf(t.facing)>=0;});}],
+      ['clock','A tempo is the tempo of something: what it keeps time with.',function(t){return CLOCK[t.facing].indexOf(t.tempo)>=0;}]
+    ];
+    var REG=[
+      ['agent','The agent',{forWhom:'owner',facing:'owner',context:'all',rights:['act','suggest'],tempo:'demand',answers:'owner'}],
+      ['angel','The angel',{forWhom:'owner',facing:'owner',context:'momentum',rights:['act','suggest'],tempo:'days',answers:'owner'}],
+      ['soldier','The soldier',{forWhom:'owner',facing:'person',context:'momentum',rights:['suggest'],tempo:'live',answers:'owner'}],
+      ['interpreter','The interpreter',{forWhom:'both',facing:'person',context:'words',rights:['translate'],tempo:'live',answers:'speaker'}],
+      ['interview','The interview',{forWhom:'each',facing:'agent',context:'brief',rights:['conclude'],tempo:'timeboxed',answers:'party'}],
+      ['call','The call',{forWhom:'owner',facing:'person',context:'given',rights:['suggest','speak'],tempo:'live',answers:'owner'}],
+      ['portage','The portage',{forWhom:'owner',facing:'guest',context:'given',rights:['answer'],tempo:'standing',answers:'owner'}]
+    ];
+    function copy(t){var c={};for(var k in t)c[k]=Array.isArray(t[k])?t[k].slice():t[k];return c;}
+    function key(t){return [t.forWhom,t.facing,t.context,t.rights.slice().sort().join('+'),t.tempo,t.answers].join('|');}
+    var cur=copy(REG[1][2]);
+    var elP=document.getElementById('presets'),elA=document.getElementById('axes'),elV=document.getElementById('verdict');
+    function chip(label,on,fn){var b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed',on?'true':'false');b.textContent=label;b.addEventListener('click',fn);return b;}
+    function broken(t){return RULES.filter(function(r){return !r[2](t);});}
+    function existing(t){var k=key(t);for(var i=0;i<REG.length;i++)if(key(REG[i][2])===k)return REG[i];return null;}
+    function nearest(t){var best=null,bd=99,names=[];REG.forEach(function(m){var d=[];AX.forEach(function(a){var x=a[0]==='rights'?t.rights.slice().sort().join('+'):t[a[0]],y=a[0]==='rights'?m[2].rights.slice().sort().join('+'):m[2][a[0]];if(x!==y)d.push(a[1].toLowerCase());});if(d.length<bd){bd=d.length;best=m;names=d;}});return {m:best,d:names};}
+    function draw(){
+      elP.innerHTML='';REG.forEach(function(m){elP.appendChild(chip(m[1],key(m[2])===key(cur),function(){cur=copy(m[2]);draw();}));});
+      elA.innerHTML='';
+      AX.forEach(function(a){var g=document.createElement('div');g.className='axis';var l=document.createElement('span');l.className='mono';l.textContent=a[1]+(a[0]==='rights'?' (any of)':'');g.appendChild(l);var w=document.createElement('div');w.className='chips';
+        a[2].forEach(function(v){var on=a[0]==='rights'?cur.rights.indexOf(v)>=0:cur[a[0]]===v;
+          w.appendChild(chip(a[3][v],on,function(){if(a[0]==='rights'){var i=cur.rights.indexOf(v);if(i>=0)cur.rights.splice(i,1);else cur.rights.push(v);}else cur[a[0]]=v;draw();}));});
+        g.appendChild(w);elA.appendChild(g);});
+      var br=broken(cur),ex=existing(cur),h='';
+      if(br.length){h='<b class="no">It cannot exist.</b><ul>'+br.map(function(r){return '<li><span class="mono">'+r[0]+'</span> '+r[1]+'</li>';}).join('')+'</ul>';}
+      else if(ex){h='<b class="yes">This is '+ex[1].toLowerCase()+'.</b><p>A mandate that exists today.</p>';}
+      else{var n=nearest(cur);h='<b class="yes">It can exist.</b><p>No mode of Aiwa carries it yet. Nearest: '+n.m[1].toLowerCase()+(n.d.length?', which differs by '+n.d.join(', '):'')+'.</p>';}
+      elV.innerHTML=h;
+    }
+    // the same rules, counted: the code's own figures (70,875 combinations, 177 that pass)
+    window.__mandateCounts=function(){var n=0,v=0,R=AX[3][2];for(var f=0;f<3;f++)for(var fa=0;fa<5;fa++)for(var c=0;c<5;c++)for(var m=1;m<64;m++)for(var te=0;te<5;te++)for(var a=0;a<3;a++){n++;var t={forWhom:AX[0][2][f],facing:AX[1][2][fa],context:AX[2][2][c],rights:R.filter(function(_,i){return m&(1<<i);}),tempo:AX[4][2][te],answers:AX[5][2][a]};if(!broken(t).length)v++;}return {space:n,valid:v};};
+    draw();
+  })();
+  </script>
 </section>
 <section id="protocol">
   <p class="mono">Protocol</p>

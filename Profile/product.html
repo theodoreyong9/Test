@@ -400,6 +400,21 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 .tuples b{font-size:clamp(22px,3vw,40px);font-weight:300;letter-spacing:-.03em}
 .tuples span{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.06em;color:var(--dim);line-height:1.7}
 @media (max-width:640px){.tuples div{grid-template-columns:1fr;gap:4px}}
+.composer{margin-top:clamp(30px,5vw,56px);display:grid;gap:clamp(22px,3.4vw,40px)}
+.presets,.chips{display:flex;flex-wrap:wrap;gap:10px}
+.axes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,3vw,34px) clamp(24px,4vw,56px)}
+.axis{display:grid;gap:12px;align-content:start}
+.chip{font:inherit;font-size:clamp(14px,1.3vw,17px);color:var(--text);background:rgba(255,255,255,.06);border:0;border-radius:999px;padding:.6em 1.15em;cursor:pointer;transition:background .3s,transform .3s}
+.chip:hover{background:rgba(255,255,255,.12)}
+.chip[aria-pressed="true"]{background:linear-gradient(100deg,var(--pink),var(--violet));color:#fff}
+.chip:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.verdict{min-height:120px;padding-top:6px}
+.verdict b{display:block;font-weight:300;font-size:clamp(30px,5vw,72px);letter-spacing:-.04em;line-height:1}
+.verdict b.yes{background:linear-gradient(100deg,var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.14em}
+.verdict b.no{color:var(--amber)}
+.verdict p{margin:12px 0 0;color:var(--dim);max-width:60ch}
+.verdict ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px;max-width:64ch;color:#c9c1d8}
+.verdict li .mono{margin-right:10px;color:var(--amber)}
 </style>
 </head>
 <body>
@@ -442,11 +457,11 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
   <p class="lead" style="margin-top:28px;max-width:62ch">A lot of the field turns one general model into many specialists: an agent for each job, wired together. Aiwa bets on something else. It stays <b>one agent</b>, and what changes from one situation to the next is its <b>mandate</b>: for whom it acts, who is across from it, what it may share, what it may do, and what it answers for.</p>
   <div class="grid" style="margin-top:34px">
     <div class="card"><span class="mono">1 · Your agent</span><h3>It acts for you.</h3><p>By text, by voice or on a schedule: it makes, connects, plans and meets, in your own GitHub.</p></div>
-    <div class="card"><span class="mono">2 · The Angel</span><h3>It prompts you, over days.</h3><p>It watches your momentum and tells you the next move that would raise it.</p></div>
+    <div class="card"><span class="mono">2 · The Angel</span><h3>It prompts you, over days.</h3><p>It watches your momentum, tells you the next move that would raise it, and makes it when you allow.</p></div>
     <div class="card"><span class="mono">3 · The Interpreter</span><h3>It stands between two people.</h3><p>Two languages, live, so that each hears the other in their own.</p></div>
     <div class="card"><span class="mono">4 · The Interview</span><h3>It interviews, and is interviewed.</h3><p>Free, with the AI on the other side: each candidate is interviewed by their own agent.</p></div>
     <div class="card"><span class="mono">5 · The Soldier</span><h3>It prompts you, in seconds.</h3><p>It listens to the conversation and writes on your screen what you could say next.</p></div>
-    <div class="card"><span class="mono">6 · The Call</span><h3>It calls for you.</h3><p>It places the call, speaks in your name, and keeps the notes as a file of the person.</p></div>
+    <div class="card"><span class="mono">6 · The Call</span><h3>It calls for you.</h3><p>It places the call, speaks in your name when you allow it, and keeps the notes as a file of the person.</p></div>
     <div class="card" style="grid-column:1/-1"><span class="mono">7 · The Portage</span><h3>It is a door to your Aiwa.</h3><p>Anyone you invite talks to an agent of yours that can only talk, and knows of you only what you chose.</p></div>
   </div>
   <div class="steps">

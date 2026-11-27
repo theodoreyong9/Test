@@ -400,6 +400,21 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 .tuples b{font-size:clamp(22px,3vw,40px);font-weight:300;letter-spacing:-.03em}
 .tuples span{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.06em;color:var(--dim);line-height:1.7}
 @media (max-width:640px){.tuples div{grid-template-columns:1fr;gap:4px}}
+.composer{margin-top:clamp(30px,5vw,56px);display:grid;gap:clamp(22px,3.4vw,40px)}
+.presets,.chips{display:flex;flex-wrap:wrap;gap:10px}
+.axes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,3vw,34px) clamp(24px,4vw,56px)}
+.axis{display:grid;gap:12px;align-content:start}
+.chip{font:inherit;font-size:clamp(14px,1.3vw,17px);color:var(--text);background:rgba(255,255,255,.06);border:0;border-radius:999px;padding:.6em 1.15em;cursor:pointer;transition:background .3s,transform .3s}
+.chip:hover{background:rgba(255,255,255,.12)}
+.chip[aria-pressed="true"]{background:linear-gradient(100deg,var(--pink),var(--violet));color:#fff}
+.chip:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.verdict{min-height:120px;padding-top:6px}
+.verdict b{display:block;font-weight:300;font-size:clamp(30px,5vw,72px);letter-spacing:-.04em;line-height:1}
+.verdict b.yes{background:linear-gradient(100deg,var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.14em}
+.verdict b.no{color:var(--amber)}
+.verdict p{margin:12px 0 0;color:var(--dim);max-width:60ch}
+.verdict ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px;max-width:64ch;color:#c9c1d8}
+.verdict li .mono{margin-right:10px;color:var(--amber)}
 </style>
 </head>
 <body>
