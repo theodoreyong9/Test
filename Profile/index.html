@@ -368,6 +368,14 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 .proof-fig{display:block;width:min(100%,900px);height:auto;margin:clamp(34px,6vw,70px) 0 0}
 .proof-fig .lb{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#a79fb8}
 @media (prefers-reduced-motion:reduce){.fig .orbit{animation:none}}
+/* the signature: a thread of light pulled through the page by the scroll; the face lives in the headline; the type leans with the speed of the scroll */
+.thread{position:absolute;left:0;top:0;width:100%;z-index:-1;pointer-events:none;overflow:visible}
+.thread path{fill:none;stroke-linecap:round}
+.inl{display:inline-block;width:1.25em;height:.74em;margin:0 .06em;border-radius:999px;vertical-align:-.04em;overflow:hidden;position:relative;background:radial-gradient(circle at 35% 30%,rgba(244,123,203,.9),rgba(139,80,216,.7) 55%,rgba(85,217,237,.5));box-shadow:0 0 .5em rgba(139,80,216,.55)}
+.inl canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero h1{transform:translateY(calc(var(--sy,0)*.05px)) skewY(calc(var(--v,0)*-2.5deg))!important;transform-origin:0 100%}
+.scene .big{transform:translateY(calc((.5 - var(--p,0))*-16vh)) skewY(calc(var(--v,0)*-3deg))!important;transform-origin:0 100%}
+.page-head h1,#proof h2{transform:skewY(calc(var(--v,0)*-2.5deg));transform-origin:0 100%}
 </style>
 </head>
 <body>
@@ -388,7 +396,7 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 <div class="hero">
   <div class="copy">
     <p class="mono">Aiwa</p>
-    <h1>AI should carry<br>you to people,<br><em class="g">not replace you.</em></h1>
+    <h1>AI should carry<br>you to <span class="inl" id="heroFace" aria-hidden="true"></span> people,<br><em class="g">not replace you.</em></h1>
     <p class="sub">Not hands-free. Hands together.</p>
     <p class="lead">An intelligence that acts in the interest of one person, from their context, under their authority.</p>
     <div class="cta">
@@ -773,7 +781,7 @@ if(fine&&!reduce){ var cur=el('div','cur'); body.appendChild(cur); var cx=0,cy=0
   document.addEventListener('pointerover',function(e){ cur.classList.toggle('big',!!(e.target.closest&&e.target.closest('a,button,summary,.btn'))); });
   Array.prototype.forEach.call(document.querySelectorAll('.btn'),function(b){ b.addEventListener('pointermove',function(e){ var r=b.getBoundingClientRect(); b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.28)+'px)'; }); b.addEventListener('pointerleave',function(){ b.style.transform=''; }); }); }
 /* the head of Aiwa lives in the portage (the door where the guest sees her face); the orb stays in the hero. A copy of the page without the head files keeps no face. */
-(function(){ var box=document.getElementById('portageFace'); if(!box||reduce) return;
+(function(){ var box=document.getElementById('portageFace')||document.getElementById('heroFace'); if(!box||reduce) return;
   fetch('aiwa-head.bin',{method:'HEAD'}).then(function(r){ if(!r.ok) throw 0; return new Promise(function(ok,no){ var s=document.createElement('script'); s.src='head.js'; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); })
   .then(function(){ if(!window.AiwaHead) return; var c=document.createElement('canvas'); box.appendChild(c); return AiwaHead.start(c).then(function(h){ h.state({awake:1,smile:.2}); }); })
   .catch(function(){}); })();
@@ -825,6 +833,46 @@ function frame(){
 function on(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
 addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); frame();
 })();
+/* the thread: one line of light drawn through the page by the scroll, from the orb to the last call; a bright point leads it; the page's own speed leans the type */
+(function(){
+  var main=document.querySelector('main'); if(!main) return;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var NS='http://www.w3.org/2000/svg';
+  var svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','thread'); svg.setAttribute('aria-hidden','true');
+  svg.innerHTML='<defs><linearGradient id="thg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f47bcb"/><stop offset=".5" stop-color="#8b50d8"/><stop offset="1" stop-color="#55d9ed"/></linearGradient><filter id="thb" x="-20%" y="-2%" width="140%" height="104%"><feGaussianBlur stdDeviation="7"/></filter></defs><path id="thglow" stroke="url(#thg)" stroke-width="10" opacity=".5" filter="url(#thb)"/><path id="thline" stroke="url(#thg)" stroke-width="2"/><circle id="thdot" r="7" fill="#fff"/><circle id="thhalo" r="18" fill="#f47bcb" opacity=".35" filter="url(#thb)"/>';
+  main.insertBefore(svg,main.firstChild);
+  var glow=svg.querySelector('#thglow'), line=svg.querySelector('#thline'), dot=svg.querySelector('#thdot'), halo=svg.querySelector('#thhalo'), grad=svg.querySelector('#thg');
+  var len=1, H=1, top0=0;
+  function build(){
+    var W=main.offsetWidth; H=main.offsetHeight; svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.style.height=H+'px';
+    var vh=innerHeight, base=main.getBoundingClientRect().top+scrollY;
+    var pts=[[W*(W<760?.5:.76), vh*.55]];
+    var kids=[].slice.call(main.children).filter(function(e){return e!==svg && !e.classList.contains('hero') && e.offsetHeight>0;});
+    kids.forEach(function(e,i){ var r=e.getBoundingClientRect(); var y=r.top+scrollY-base+Math.min(r.height,vh)*.5; pts.push([W*(W<760?(i%2?.7:.3):(i%2?.16:.84)), y]); });
+    var d='M'+pts[0][0]+' '+pts[0][1];
+    for(var k=1;k<pts.length;k++){ var a=pts[k-1], b=pts[k], m=(a[1]+b[1])/2; d+=' C'+a[0]+' '+m+' '+b[0]+' '+m+' '+b[0]+' '+b[1]; }
+    glow.setAttribute('d',d); line.setAttribute('d',d);
+    len=line.getTotalLength(); glow.style.strokeDasharray=line.style.strokeDasharray=len;
+    grad.setAttribute('y2',H);
+    update();
+  }
+  var lastY=scrollY, v=0, ticking=false;
+  function update(){
+    var p=Math.max(0,Math.min(1,(scrollY+innerHeight*.6-(main.getBoundingClientRect().top+scrollY))/H));
+    var off=len*(1-p); glow.style.strokeDashoffset=line.style.strokeDashoffset=off;
+    var pt=line.getPointAtLength(Math.max(0.01,len*p)); dot.setAttribute('cx',pt.x); dot.setAttribute('cy',pt.y); halo.setAttribute('cx',pt.x); halo.setAttribute('cy',pt.y);
+  }
+  function frame(){
+    ticking=false; var y=scrollY, dy=y-lastY; lastY=y;
+    v+=(Math.max(-1,Math.min(1,dy/50))-v)*.14; document.documentElement.style.setProperty('--v',v.toFixed(3));
+    update(); if(Math.abs(v)>.002||dy) { requestAnimationFrame(frame); ticking=true; } 
+  }
+  function on(){ if(!ticking){ ticking=true; requestAnimationFrame(frame); } }
+  if(reduce){ svg.style.display='none'; return; }
+  addEventListener('scroll',on,{passive:true}); addEventListener('resize',function(){build();on();});
+  build(); setTimeout(build,900); setTimeout(build,2600); addEventListener('load',build);
+})();
+
 </script>
 </body>
 </html>
