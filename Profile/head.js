@@ -209,6 +209,7 @@ function start(canvas,opts){
       pose.yaw+=st.px*.35+st.mx*.35; pose.pitch+=st.py*.2+st.my*.25;       /* the head turns a little toward the pointer, and against the turn of the phone */
       var s=Math.min(canvas.width,canvas.height);
       rig.update(pose,canvas.width/2,canvas.height/2+s*.03,s);
+      canvas.__pose=pose;                          /* read by the accessories drawn over this head (the site) */
       gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(lr,canvas.width,canvas.height);
       gl.bindBuffer(gl.ARRAY_BUFFER,bp); gl.bufferData(gl.ARRAY_BUFFER,rig.xy,gl.DYNAMIC_DRAW); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);

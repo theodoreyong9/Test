@@ -415,6 +415,10 @@ details.more summary{border:0!important;background:rgba(255,255,255,.06)}
 .verdict p{margin:12px 0 0;color:var(--dim);max-width:60ch}
 .verdict ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px;max-width:64ch;color:#c9c1d8}
 .verdict li .mono{margin-right:10px;color:var(--amber)}
+.faces{display:flex;gap:clamp(4px,1.2vw,14px);margin:0 0 clamp(10px,1.6vw,22px) -8px}
+.faces .f{position:relative;width:clamp(74px,8.4vw,116px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 60%,rgba(139,80,216,.30),rgba(139,80,216,0) 68%)}
+.faces canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media (max-width:760px){.faces .f{width:clamp(68px,21vw,92px)}}
 </style>
 </head>
 <body>
@@ -939,6 +943,84 @@ addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); fra
   if(reduce){ svg.style.display='none'; return; }
   addEventListener('scroll',on,{passive:true}); addEventListener('resize',function(){build();on();});
   build(); setTimeout(build,900); setTimeout(build,2600); addEventListener('load',build);
+})();
+/* The accessories as 3D objects: read aiwa-acc.bin, turn with the head, light, sort, draw triangles (the same maths as the Kotlin renderer). */
+var ACC={}; /* the accessories as 3D objects (same maths as the Kotlin renderer) */
+function loadAcc(buf){
+  var dv=new DataView(buf),o=0,n=dv.getInt32(o,true);o+=4;
+  var names=['SUNGLASSES','MOHAWK','CROWN','HEADBAND','MONOCLE','MOUSTACHE','CAP'];
+  for(var a=0;a<n;a++){
+    var nv=dv.getInt32(o,true),nt=dv.getInt32(o+4,true);o+=8;
+    var m={nv:nv,nt:nt};
+    m.p=new Float32Array(buf.slice(o,o+nv*12));o+=nv*12; m.n=new Float32Array(buf.slice(o,o+nv*12));o+=nv*12;
+    m.c=new Uint8Array(buf.slice(o,o+nv*4));o+=nv*4; m.m=new Uint8Array(buf.slice(o,o+nv));o+=nv;
+    m.t=new Uint16Array(buf.slice(o,o+nt*6));o+=nt*6; ACC[names[a]]=m;
+  }
+}
+function drawAcc3D(g,worn,pose,W,H){
+  var s=Math.min(W,H),cx=W/2,cy=H/2+s*.03,scale=s*.36;
+  var roll=pose.roll-0.025,cy_=Math.cos(pose.yaw),sy=Math.sin(pose.yaw),cp=Math.cos(pose.pitch),sp=Math.sin(pose.pitch),cr=Math.cos(roll),sr=Math.sin(roll);
+  function rot(x,y,z){var x1=x*cy_+z*sy,z1=-x*sy+z*cy_,y2=y*cp-z1*sp,z2=y*sp+z1*cp;return [x1*cr-y2*sr,x1*sr+y2*cr,z2];}
+  function inv(x,y,z){ /* the screen's z axis in head space: the transpose of the turn */
+    var x3=x*cr+y*sr,y3=-x*sr+y*cr,z2=z; var y2=y3*cp+z2*sp,z1=-y3*sp+z2*cp; return [x3*cy_-z1*sy,y2,x3*sy+z1*cy_];}
+  var D=inv(0,0,1);
+  var EA=.50,EB=.74,EC=.46,EY=.10;
+  function hidden(px,py,pz){ var ox=px/EA,oy=(py-EY)/EB,oz=pz/EC,dx=D[0]/EA,dy=D[1]/EB,dz=D[2]/EC;
+    var a=dx*dx+dy*dy+dz*dz,b=2*(ox*dx+oy*dy+oz*dz),c=ox*ox+oy*oy+oz*oz-1,disc=b*b-4*a*c; if(disc<0) return false;
+    var t2=(-b+Math.sqrt(disc))/(2*a); return t2>0.02; }
+  var tris=[];
+  for(var name of worn){ var m=ACC[name]; if(!m) continue;
+    var X=new Float32Array(m.nv*3),C=new Float32Array(m.nv*4);
+    for(var i=0;i<m.nv;i++){
+      var px=m.p[i*3],py=m.p[i*3+1],pz=m.p[i*3+2], q=rot(px,py,pz), persp=1/(1-q[2]*.10);
+      X[i*3]=cx+q[0]*scale*persp; X[i*3+1]=cy-(q[1]+.05)*scale*persp; X[i*3+2]=q[2];
+      var nq=rot(m.n[i*3],m.n[i*3+1],m.n[i*3+2]),rx=nq[0],ry=nq[1],rz=nq[2];
+      var key=Math.max(0,rx*-.45+ry*.62+rz*.64),fill=Math.max(0,rx*.70+ry*-.15+rz*.35),fres=Math.pow(1-Math.min(1,Math.abs(rz)),3);
+      var hl=Math.sqrt(.225*.225+.31*.31+.82*.82),nh=Math.max(0,(rx*-.225+ry*.31+rz*.82)/hl);
+      var sp24=Math.pow(nh,24),sp64=Math.pow(nh,64),sp12=Math.pow(nh,12),sp40=Math.pow(nh,40);
+      var br=m.c[i*4]/255,bg=m.c[i*4+1]/255,bb=m.c[i*4+2]/255,ba=m.c[i*4+3]/255,mat=m.m[i]&15,r,gg,b,al=ba;
+      if(mat==1){ var ey=2*rz*ry,ex=2*rz*rx,env=Math.min(1,Math.max(0,.5+.55*ey+.15*ex)); env=env*env*(3-2*env);
+        var k=.20+.80*env+key*.18; r=br*k+sp64*.85+sp12*.10; gg=bg*k+sp64*.85+sp12*.09; b=bb*k+sp64*.80+sp12*.08; }
+      else if(mat==2){ var k2=.28+key*.62+fill*.18; r=br*k2+sp40*.8+fres*.20; gg=bg*k2+sp40*.8+fres*.2; b=bb*k2+sp40*.8+fres*.26; al=Math.min(1,ba+fres*.25+sp40*.6); }
+      else { var k3=.34+key*.66+fill*.20; r=br*k3+sp24*.06+fres*.05; gg=bg*k3+sp24*.06+fres*.05; b=bb*k3+sp24*.05+fres*.08; }
+      C[i*4]=Math.min(1,r);C[i*4+1]=Math.min(1,gg);C[i*4+2]=Math.min(1,b);C[i*4+3]=al;
+    }
+    for(var t=0;t<m.nt;t++){
+      var a=m.t[t*3],b2=m.t[t*3+1],c2=m.t[t*3+2];
+      if((m.m[a]&16)&&(m.m[b2]&16)&&(m.m[c2]&16)){
+        var mx=(m.p[a*3]+m.p[b2*3]+m.p[c2*3])/3,my=(m.p[a*3+1]+m.p[b2*3+1]+m.p[c2*3+1])/3,mz=(m.p[a*3+2]+m.p[b2*3+2]+m.p[c2*3+2])/3;
+        if(hidden(mx,my,mz)) continue; }
+      tris.push({X:X,C:C,a:a,b:b2,c:c2,z:(X[a*3+2]+X[b2*3+2]+X[c2*3+2])/3});
+    }
+  }
+  tris.sort(function(u,v){return u.z-v.z;});
+  for(var T of tris){ var X=T.X,C=T.C,ids=[T.a,T.b,T.c];
+    var col=[0,0,0,0]; ids.forEach(function(i){for(var k=0;k<4;k++)col[k]+=C[i*4+k]/3;});
+    g.beginPath(); g.moveTo(X[ids[0]*3],X[ids[0]*3+1]); g.lineTo(X[ids[1]*3],X[ids[1]*3+1]); g.lineTo(X[ids[2]*3],X[ids[2]*3+1]); g.closePath();
+    var f='rgba('+Math.round(col[0]*255)+','+Math.round(col[1]*255)+','+Math.round(col[2]*255)+','+col[3].toFixed(3)+')';
+    g.fillStyle=f; g.strokeStyle=f; g.lineWidth=.8; g.fill(); g.stroke(); }
+}
+
+/* the faces above the title: each head wears something, and turns toward the pointer */
+(function(){
+  var strip=document.getElementById('faces'); if(!strip) return;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var sets=[['SUNGLASSES'],['CROWN'],['CAP'],['MOHAWK'],['MONOCLE','MOUSTACHE']];
+  var count=innerWidth<760?3:4; sets=[sets[0],sets[1],sets[2],sets[3]].slice(0,count);
+  if(count===4) sets[3]=['MONOCLE','MOUSTACHE'];
+  var heads=[], tries=0;
+  function ready(){ return window.AiwaHead && ACC.SUNGLASSES; }
+  fetch('aiwa-acc.bin').then(function(r){ if(!r.ok) throw 0; return r.arrayBuffer(); }).then(function(b){ loadAcc(b); }).catch(function(){});
+  var t=setInterval(function(){
+    if(++tries>80){ clearInterval(t); return; }
+    if(!ready()) return; clearInterval(t);
+    sets.forEach(function(worn,i){
+      var f=document.createElement('div'); f.className='f'; var c=document.createElement('canvas'), o=document.createElement('canvas');
+      f.appendChild(c); f.appendChild(o); strip.appendChild(f);
+      AiwaHead.start(c).then(function(h){ h.state({awake:1,smile:.18+i*.04}); heads.push({c:c,o:o,g:o.getContext('2d'),worn:worn}); }).catch(function(){ f.remove(); });
+    });
+    if(!reduce) (function loop(){ requestAnimationFrame(loop); heads.forEach(function(x){ if(!x.c.__pose) return; if(x.o.width!==x.c.width||x.o.height!==x.c.height){ x.o.width=x.c.width; x.o.height=x.c.height; } x.g.clearRect(0,0,x.o.width,x.o.height); drawAcc3D(x.g,x.worn,x.c.__pose,x.o.width,x.o.height); }); })();
+  },100);
 })();
 
 </script>
