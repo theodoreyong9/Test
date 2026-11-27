@@ -295,7 +295,7 @@ header nav.hn a:hover{color:var(--text)}
 .scene .stick{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);overflow:hidden}
 .scene::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(55% 45% at calc(25% + var(--p,0)*50%) calc(60% - var(--p,0)*20%),var(--c,rgba(139,80,216,.35)),transparent 70%);opacity:.9}
 .scene .mono{opacity:clamp(0,calc((var(--p,0) - .02)*8),1);transform:translateY(calc((1 - clamp(0,calc((var(--p,0) - .02)*8),1))*24px))}
-.scene .big{margin:14px 0 0;font-weight:300;font-size:clamp(40px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;max-width:16ch;
+.scene .big{margin:14px 0 0;font-weight:300;font-size:clamp(40px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;max-width:12ch;
   opacity:min(clamp(0,calc((var(--p,0) - .04)*7),1),clamp(0,calc((.97 - var(--p,0))*12),1));
   transform:translateY(calc((.5 - var(--p,0))*-16vh))}
 .scene .big em{font-style:normal;font-weight:700}
@@ -334,6 +334,40 @@ header nav.hn a:hover{color:var(--text)}
 .static .scene{height:auto;padding:22vh 0}.static .scene .stick{position:static;height:auto}
 .static .scene .big,.static .scene .small,.static .scene .mono,.static .scene .scrub .w{opacity:1!important;transform:none!important}
 @media (prefers-reduced-motion:reduce){.hero .orb{transform:none}}
+/* fewer squares: no hairline boxes, a timeline, open lists, pills */
+section{border-top:0!important}
+.btn{border-radius:999px!important;padding:0 32px!important}
+.btn.line{border-color:rgba(255,255,255,.18)!important}
+.grid{gap:clamp(36px,5vw,72px) clamp(28px,4vw,64px)!important;background:none!important;border:0!important}
+.card{background:none!important;padding:0!important}
+.card::before{content:"";display:block;width:36px;height:2px;margin-bottom:18px;border-radius:2px;background:linear-gradient(90deg,var(--pink),var(--cyan))}
+.steps{display:block!important;background:none!important;border:0!important;border-left:1px solid #2c2347!important;margin-left:6px;padding-left:0}
+.steps div{position:relative;background:none!important;padding:0 0 clamp(34px,5vw,56px) clamp(28px,4vw,48px)!important;max-width:64ch}
+.steps div::before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--cyan));box-shadow:0 0 0 6px var(--ground)}
+.steps div:last-child{padding-bottom:0!important}
+.big div{border-bottom:0!important}
+.dl a{border:0!important;border-radius:28px!important;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015))!important}
+.dl a:hover{background:linear-gradient(160deg,rgba(244,123,203,.18),rgba(139,80,216,.08))!important}
+.ais span,.contacts li{border:0!important;background:rgba(255,255,255,.06)}
+.stage{border:0!important;border-radius:32px!important}
+.msg.you,.msg.aiwa{border:0!important}
+footer{border-top:0!important}
+details.more summary{border:0!important;background:rgba(255,255,255,.06)}
+/* the figures of the scenes */
+.fig{position:absolute;right:calc(var(--pad)*.2);top:50%;width:min(40vw,520px);aspect-ratio:1;transform:translateY(-50%);z-index:-1;pointer-events:none;overflow:visible;
+  opacity:min(clamp(0,calc((var(--p,0) - .03)*6),1),clamp(0,calc((.97 - var(--p,0))*10),1))}
+.fig .ln{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--d,1))}
+.fig .ln.dash{stroke-dasharray:3 7;stroke-dashoffset:0}
+.fig .ln.thick{stroke-width:3}
+.fig .orbit{fill:none;stroke:#3a3150;stroke-width:1;stroke-dasharray:2 9;transform-origin:200px 200px;animation:spin 70s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fig .lb{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#a79fb8}
+.fig .lb.c{fill:#050408;font-weight:700;font-size:10px}
+.fig .lb.c2{fill:#f47bcb}
+@media (max-width:760px){.fig{width:96vw;right:2vw;top:auto;bottom:4vh;transform:none;opacity:.55!important}}
+.proof-fig{display:block;width:min(100%,900px);height:auto;margin:clamp(34px,6vw,70px) 0 0}
+.proof-fig .lb{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#a79fb8}
+@media (prefers-reduced-motion:reduce){.fig .orbit{animation:none}}
 </style>
 </head>
 <body>
@@ -405,6 +439,14 @@ header nav.hn a:hover{color:var(--text)}
 </div>
 <div class="scene" id="s2" style="--h:210vh;--c:rgba(244,123,203,.26)">
   <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <svg class="fig" viewBox="-70 0 540 400" aria-hidden="true">
+  <defs><linearGradient id="fg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f47bcb"/><stop offset=".55" stop-color="#8b50d8"/><stop offset="1" stop-color="#55d9ed"/></linearGradient></defs>
+  <circle cx="200" cy="200" r="132" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - .04)*3),1)"/>
+  <circle cx="200" cy="200" r="168" class="orbit"/>
+  <line x1="200" y1="200" x2="200.0" y2="68.0" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.14)*5),1)"/><line x1="200" y1="200" x2="303.2" y2="117.7" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.21)*5),1)"/><line x1="200" y1="200" x2="328.7" y2="229.4" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.28)*5),1)"/><line x1="200" y1="200" x2="257.3" y2="318.9" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.35)*5),1)"/><line x1="200" y1="200" x2="142.7" y2="318.9" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.42)*5),1)"/><line x1="200" y1="200" x2="71.3" y2="229.4" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.49)*5),1)"/><line x1="200" y1="200" x2="96.8" y2="117.7" pathLength="1" class="ln" stroke="url(#fg)" style="--d:clamp(0,calc((var(--p) - 0.56)*5),1)"/>
+  <circle cx="200" cy="200" r="30" fill="url(#fg)" opacity=".9"/><text x="200" y="204" text-anchor="middle" class="lb c">YOU</text>
+  <circle cx="200.0" cy="68.0" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.18)*8),1)"/><circle cx="303.2" cy="117.7" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.25)*8),1)"/><circle cx="328.7" cy="229.4" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.32)*8),1)"/><circle cx="257.3" cy="318.9" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.39)*8),1)"/><circle cx="142.7" cy="318.9" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.46)*8),1)"/><circle cx="71.3" cy="229.4" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.53)*8),1)"/><circle cx="96.8" cy="117.7" r="7" fill="url(#fg)" style="opacity:clamp(0,calc((var(--p) - 0.60)*8),1)"/><text x="200.0" y="50.0" text-anchor="middle" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.20)*8),1)">Agent</text><text x="320.4" y="108.0" text-anchor="start" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.27)*8),1)">Angel</text><text x="350.1" y="238.3" text-anchor="start" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.34)*8),1)">Interpreter</text><text x="266.8" y="342.7" text-anchor="start" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.41)*8),1)">Interview</text><text x="133.2" y="342.7" text-anchor="end" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.48)*8),1)">Soldier</text><text x="49.9" y="238.3" text-anchor="end" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.55)*8),1)">Phone</text><text x="79.6" y="108.0" text-anchor="end" class="lb" style="opacity:clamp(0,calc((var(--p) - 0.62)*8),1)">Portage</text>
+</svg>
     <p class="mono">Authority</p>
     <h2 class="big">Bye bye agents. <em class="g">Hello mandates.</em></h2>
     <p class="small">You give the intention, the perimeter and the permission. Aiwa acts in your name, and only there.</p>
@@ -412,6 +454,24 @@ header nav.hn a:hover{color:var(--text)}
 </div>
 <div class="scene" id="s3" style="--h:210vh;--c:rgba(85,217,237,.22)">
   <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <svg class="fig" viewBox="0 0 400 400" aria-hidden="true">
+  <defs><linearGradient id="fg2" x1="0" x2="1"><stop offset="0" stop-color="#f47bcb"/><stop offset=".55" stop-color="#8b50d8"/><stop offset="1" stop-color="#55d9ed"/></linearGradient>
+  <radialGradient id="blob" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f47bcb" stop-opacity=".85"/><stop offset=".6" stop-color="#8b50d8" stop-opacity=".45"/><stop offset="1" stop-color="#55d9ed" stop-opacity="0"/></radialGradient></defs>
+  <g style="opacity:clamp(0,calc(1 - (var(--p) - .28)*5),1)">
+    <path d="M70 150 L330 118 L70 188 L330 156 L70 226 L330 194 L70 264 L330 232" class="ln dash" stroke="#a79fb8" style="--d:1"/>
+    <text x="200" y="316" text-anchor="middle" class="lb">messages</text>
+  </g>
+  <g style="opacity:clamp(0,calc((var(--p) - .34)*5),1)">
+    <circle cx="200" cy="200" r="86" fill="url(#blob)"/><circle cx="168" cy="224" r="52" fill="url(#blob)"/><circle cx="238" cy="172" r="58" fill="url(#blob)"/>
+    <path id="cp1" d="M72 200 C 120 200, 140 200, 190 200" pathLength="1" class="ln" stroke="url(#fg2)" style="--d:clamp(0,calc((var(--p) - .4)*4),1)"/>
+    <path id="cp2" d="M328 200 C 280 200, 262 200, 212 200" pathLength="1" class="ln" stroke="url(#fg2)" style="--d:clamp(0,calc((var(--p) - .4)*4),1)"/>
+    <circle r="4" fill="#fff"><animateMotion dur="2.6s" repeatCount="indefinite" path="M72 200 C 120 200, 140 200, 190 200"/></circle>
+    <circle r="4" fill="#fff"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M328 200 C 280 200, 262 200, 212 200"/></circle>
+    <text x="200" y="316" text-anchor="middle" class="lb c2">shared context</text>
+  </g>
+  <circle cx="60" cy="200" r="16" fill="url(#fg2)"/><text x="60" y="244" text-anchor="middle" class="lb">you</text>
+  <circle cx="340" cy="200" r="16" fill="url(#fg2)"/><text x="340" y="244" text-anchor="middle" class="lb">them</text>
+</svg>
     <p class="mono">Context</p>
     <h2 class="big">Contexting is the new <em class="g">messaging.</em></h2>
     <p class="small">Do not make two AIs talk. Let them share the context that matters, as far as you decide.</p>
@@ -419,6 +479,16 @@ header nav.hn a:hover{color:var(--text)}
 </div>
 <div class="scene" id="s4" style="--h:210vh;--c:rgba(255,154,85,.20)">
   <div class="stick"><span class="blob a"></span><span class="blob b"></span>
+    <svg class="fig" viewBox="0 0 400 400" aria-hidden="true">
+  <defs><linearGradient id="fg3" x1="0" x2="1"><stop offset="0" stop-color="#f47bcb"/><stop offset=".5" stop-color="#8b50d8"/><stop offset="1" stop-color="#55d9ed"/></linearGradient></defs>
+  <path d="M40 360 L40 40 M40 360 L370 360" class="ln" stroke="#3a3150" style="--d:clamp(0,calc((var(--p) - .02)*6),1)" pathLength="1"/>
+  <path d="M44 150 C 140 150, 230 190, 368 292" class="ln dash" stroke="#a79fb8" pathLength="1" style="--d:clamp(0,calc((var(--p) - .14)*2.4),1)"/>
+  <path d="M44 330 C 120 322, 180 270, 232 200 S 330 92, 368 52" class="ln thick" stroke="url(#fg3)" pathLength="1" style="--d:clamp(0,calc((var(--p) - .2)*2),1)"/>
+  <circle cx="368" cy="52" r="8" fill="#55d9ed" style="opacity:clamp(0,calc((var(--p) - .62)*8),1)"/>
+  <text x="372" y="34" text-anchor="end" class="lb" style="opacity:clamp(0,calc((var(--p) - .62)*8),1)">with Aiwa</text>
+  <text x="372" y="318" text-anchor="end" class="lb" style="opacity:clamp(0,calc((var(--p) - .5)*8),1)">when it does it for you</text>
+  <text x="46" y="382" class="lb">time</text><text x="30" y="40" text-anchor="end" class="lb" transform="rotate(-90 30 40)">what you can do</text>
+</svg>
     <p class="mono">Growth</p>
     <h2 class="big">An AI that wants you <em class="g">to grow.</em></h2>
     <p class="small">Not more dependence. More capability, and more of the people you can reach.</p>
@@ -428,6 +498,18 @@ header nav.hn a:hover{color:var(--text)}
   <p class="mono">Proof, today</p>
   <h2>Interviews, free. <em class="g">With the opposite AI.</em></h2>
   <p class="lead">A recruiter makes a key. Every candidate is interviewed by their own agent, and only a sealed conclusion reaches the recruiter. No platform, no server, no fee per candidate.</p>
+  <svg class="proof-fig" viewBox="0 0 900 200" aria-hidden="true">
+  <defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#f47bcb"/><stop offset=".55" stop-color="#8b50d8"/><stop offset="1" stop-color="#55d9ed"/></linearGradient></defs>
+  <circle cx="90" cy="100" r="44" fill="none" stroke="url(#pg)" stroke-width="1.5"/><circle cx="90" cy="100" r="16" fill="url(#pg)"/>
+  <text x="90" y="176" text-anchor="middle" class="lb">candidate + their own agent</text>
+  <path id="pp" d="M140 100 C 300 100, 360 100, 450 100 S 600 100, 760 100" fill="none" stroke="url(#pg)" stroke-width="1.5" stroke-dasharray="2 8"/>
+  <rect x="412" y="72" width="76" height="56" rx="14" fill="none" stroke="url(#pg)" stroke-width="1.5"/><path d="M412 82 L450 108 L488 82" fill="none" stroke="url(#pg)" stroke-width="1.5"/>
+  <circle cx="450" cy="100" r="0" fill="#fff"/>
+  <circle r="5" fill="#fff"><animateMotion dur="4s" repeatCount="indefinite" path="M140 100 C 300 100, 360 100, 450 100 S 600 100, 760 100"/></circle>
+  <text x="450" y="176" text-anchor="middle" class="lb">sealed conclusion · no server</text>
+  <circle cx="810" cy="100" r="44" fill="none" stroke="url(#pg)" stroke-width="1.5"/><circle cx="810" cy="100" r="16" fill="url(#pg)"/>
+  <text x="810" y="176" text-anchor="middle" class="lb">recruiter</text>
+</svg>
   <div id="positions" class="positions"></div>
   <p class="mono" id="positions-empty" style="margin-top:36px;max-width:70ch">No open position on this page yet. Ask Aiwa: “open an interview for a baker, ten minutes, and put it on my profile”.</p>
   <div class="go"><a class="btn main" href="#get">Get Aiwa</a><a class="btn line" href="product.html">Everything it does today</a></div>

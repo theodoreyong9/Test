@@ -295,7 +295,7 @@ header nav.hn a:hover{color:var(--text)}
 .scene .stick{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);overflow:hidden}
 .scene::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(55% 45% at calc(25% + var(--p,0)*50%) calc(60% - var(--p,0)*20%),var(--c,rgba(139,80,216,.35)),transparent 70%);opacity:.9}
 .scene .mono{opacity:clamp(0,calc((var(--p,0) - .02)*8),1);transform:translateY(calc((1 - clamp(0,calc((var(--p,0) - .02)*8),1))*24px))}
-.scene .big{margin:14px 0 0;font-weight:300;font-size:clamp(40px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;max-width:16ch;
+.scene .big{margin:14px 0 0;font-weight:300;font-size:clamp(40px,8.4vw,150px);line-height:.94;letter-spacing:-.055em;max-width:12ch;
   opacity:min(clamp(0,calc((var(--p,0) - .04)*7),1),clamp(0,calc((.97 - var(--p,0))*12),1));
   transform:translateY(calc((.5 - var(--p,0))*-16vh))}
 .scene .big em{font-style:normal;font-weight:700}
@@ -334,6 +334,40 @@ header nav.hn a:hover{color:var(--text)}
 .static .scene{height:auto;padding:22vh 0}.static .scene .stick{position:static;height:auto}
 .static .scene .big,.static .scene .small,.static .scene .mono,.static .scene .scrub .w{opacity:1!important;transform:none!important}
 @media (prefers-reduced-motion:reduce){.hero .orb{transform:none}}
+/* fewer squares: no hairline boxes, a timeline, open lists, pills */
+section{border-top:0!important}
+.btn{border-radius:999px!important;padding:0 32px!important}
+.btn.line{border-color:rgba(255,255,255,.18)!important}
+.grid{gap:clamp(36px,5vw,72px) clamp(28px,4vw,64px)!important;background:none!important;border:0!important}
+.card{background:none!important;padding:0!important}
+.card::before{content:"";display:block;width:36px;height:2px;margin-bottom:18px;border-radius:2px;background:linear-gradient(90deg,var(--pink),var(--cyan))}
+.steps{display:block!important;background:none!important;border:0!important;border-left:1px solid #2c2347!important;margin-left:6px;padding-left:0}
+.steps div{position:relative;background:none!important;padding:0 0 clamp(34px,5vw,56px) clamp(28px,4vw,48px)!important;max-width:64ch}
+.steps div::before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--cyan));box-shadow:0 0 0 6px var(--ground)}
+.steps div:last-child{padding-bottom:0!important}
+.big div{border-bottom:0!important}
+.dl a{border:0!important;border-radius:28px!important;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015))!important}
+.dl a:hover{background:linear-gradient(160deg,rgba(244,123,203,.18),rgba(139,80,216,.08))!important}
+.ais span,.contacts li{border:0!important;background:rgba(255,255,255,.06)}
+.stage{border:0!important;border-radius:32px!important}
+.msg.you,.msg.aiwa{border:0!important}
+footer{border-top:0!important}
+details.more summary{border:0!important;background:rgba(255,255,255,.06)}
+/* the figures of the scenes */
+.fig{position:absolute;right:calc(var(--pad)*.2);top:50%;width:min(40vw,520px);aspect-ratio:1;transform:translateY(-50%);z-index:-1;pointer-events:none;overflow:visible;
+  opacity:min(clamp(0,calc((var(--p,0) - .03)*6),1),clamp(0,calc((.97 - var(--p,0))*10),1))}
+.fig .ln{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--d,1))}
+.fig .ln.dash{stroke-dasharray:3 7;stroke-dashoffset:0}
+.fig .ln.thick{stroke-width:3}
+.fig .orbit{fill:none;stroke:#3a3150;stroke-width:1;stroke-dasharray:2 9;transform-origin:200px 200px;animation:spin 70s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fig .lb{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#a79fb8}
+.fig .lb.c{fill:#050408;font-weight:700;font-size:10px}
+.fig .lb.c2{fill:#f47bcb}
+@media (max-width:760px){.fig{width:96vw;right:2vw;top:auto;bottom:4vh;transform:none;opacity:.55!important}}
+.proof-fig{display:block;width:min(100%,900px);height:auto;margin:clamp(34px,6vw,70px) 0 0}
+.proof-fig .lb{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#a79fb8}
+@media (prefers-reduced-motion:reduce){.fig .orbit{animation:none}}
 </style>
 </head>
 <body>
